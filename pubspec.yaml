@@ -1,0 +1,85 @@
+name: ploff_kebab
+description: A new Flutter project.
+
+publish_to: 'none' 
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+
+  # di
+  get_it: ^7.2.0
+  # UI
+  flutter_svg: ^2.0.4
+  flutter_screenutil: ^5.7.0 #responsive
+  flutter_native_splash: ^2.2.19
+  chuck_interceptor: ^1.1.4 #chuck
+  # box
+  gap: ^3.0.0
+  # rest api
+  dio: ^5.1.1
+  dio_retry_plus: ^1.0.3
+  # cached image
+  cached_network_image: ^3.2.3
+  # path
+  path_provider: ^2.0.14
+  modal_progress_hud_nsn: ^0.4.0
+  # forms
+  formz: ^0.6.0
+  dartz: ^0.10.1
+  # hive
+  hive: ^2.2.3
+  # internet checker
+  connectivity_plus: ^3.0.4
+  internet_connection_checker: ^1.0.0+1
+  # State management
+  flutter_bloc: ^8.1.2
+  # equatable
+  equatable: ^2.0.5
+  # json annotation
+  json_annotation: ^4.8.0
+  pinput: ^2.2.31
+  # biometric auth
+  local_auth: ^2.1.6
+  zoom_tap_animation: ^1.1.0
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
+  json_serializable: ^6.6.1
+
+
+flutter:
+
+
+  uses-material-design: true
+
+  assets:
+    - assets/svg/
+    - assets/images/
+    - assets/fonts/
+
+  fonts:
+    - family: SF-Pro-Display
+      fonts:
+        - asset: assets/fonts/SF_Pro_Display_Bold.otf
+          weight: 700
+        - asset: assets/fonts/SF_Pro_Display_Medium.otf
+          weight: 500
+        - asset: assets/fonts/SF_Pro_Display_Regular.otf
+          weight: 400
+  
