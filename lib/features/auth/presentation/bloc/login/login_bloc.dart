@@ -8,21 +8,18 @@ part 'login_event.dart';
 
 part 'login_state.dart';
 
-class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
-  final Login signIn;
+class LoginBloc extends Bloc<LoginEvent, AuthLoginState> with CacheMixin {
+  final LoginUseCase signIn;
 
-  LoginBloc({required this.signIn}) : super(const LoginPhoneNumberState()) {
+  LoginBloc({required this.signIn}) : super(const LoginState()) {
     on<LoginEnterPhoneNumberEvent>(_enterPhoneNumberHandler);
-    on<LoginPhoneButtonPressedEvent>(_phoneNumberPressedHandler);
-    on<LoginEnterCodeEvent>(_enterCodeHandler);
-    on<LoginCodeButtonPressedEvent>(_codePressedHandler);
   }
 
   void _enterPhoneNumberHandler(
     LoginEnterPhoneNumberEvent event,
-    Emitter<LoginState> emit,
+    Emitter<AuthLoginState> emit,
   ) {
-    var newState = state as LoginPhoneNumberState;
+    var newState = state as LoginState;
     emit(
       newState.copyWith(phoneNumber: event.phoneNumber),
     );
@@ -30,20 +27,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
 
   void _phoneNumberPressedHandler(
     LoginPhoneButtonPressedEvent event,
-    Emitter<LoginState> emit,
+    Emitter<AuthLoginState> emit,
   ) {
     emit(
       const LoginCodeState(),
     );
   }
-
-  void _enterCodeHandler(
-    LoginEnterCodeEvent event,
-    Emitter<LoginState> emit,
-  ) {}
-
-  void _codePressedHandler(
-    LoginCodeButtonPressedEvent event,
-    Emitter<LoginState> emit,
-  ) {}
 }

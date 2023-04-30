@@ -5,14 +5,12 @@ mixin CacheMixin {
   final localSource = sl<LocalSource>();
 
   void setUserInfo({
-    required String firstName,
+    required String name,
     required String phone,
-    required String password,
-    required String token,
+    // required String token,
   }) {
-    localSource.setFirstName(firstName);
-    localSource.setEmail(phone);
-    localSource.setPassword(password);
-    localSource.setAccessToken(token);
+    localSource.setName(name);
+    localSource.setPhone(phone);
+    // localSource.setAccessToken(token);
   }
 }

@@ -8,7 +8,7 @@ mixin LoginMixin {
   late FocusNode phoneNumberFocus;
   late TextEditingController codeController;
   late FocusNode codeFocus;
-  int numberLenth=0;
+  int numberLenth = 0;
 
   void initControllers() {
     pageController = PageController();
@@ -18,9 +18,9 @@ mixin LoginMixin {
     codeFocus = FocusNode();
   }
 
-  void pageMovement(LoginState state) {
+  void pageMovement(AuthLoginState state) {
     switch (state.runtimeType) {
-      case LoginPhoneNumberState:
+      case LoginState:
         pageController.animateToPage(0,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut);

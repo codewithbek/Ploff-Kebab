@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_request_entity.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_response_etity.dart';
 
-class ConfirmRegister extends UseCase<ConfirmResponseEntity, Params> {
+class ConfirmRegisterUseCase extends UseCase<ConfirmResponseEntity, Params> {
   final AuthRepository authRepository;
 
-  ConfirmRegister(this.authRepository);
+  ConfirmRegisterUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, ConfirmResponseEntity>> call(Params params) async {

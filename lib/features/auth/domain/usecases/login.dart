@@ -1,10 +1,10 @@
 import 'package:ploff_kebab/export_files.dart';
 import 'package:dartz/dartz.dart';
 
-class Login extends UseCase<AuthMessageResponseEntity, Params> {
+class LoginUseCase extends UseCase<AuthMessageResponseEntity, Params> {
   final AuthRepository authRepository;
 
-  Login(this.authRepository);
+  LoginUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, AuthMessageResponseEntity>> call(Params params) async {

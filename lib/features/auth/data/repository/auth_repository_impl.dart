@@ -28,6 +28,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, AuthMessageResponseEntity>> login(
       LoginRequestEntity requestEntity) async {
+    debugPrint('login ishga tushdi >>>>>>>> ');
+
     final request = LoginRequestModel(
       phone: requestEntity.phone,
       tag: requestEntity.tag,
@@ -53,6 +55,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, AuthMessageResponseEntity>> register(
       RegisterRequestEntity requestEntity) async {
+    debugPrint('Registerga kirdi >>>>>>>> ');
+
     final signUpRequestModel = RegisterRequestModel(
         name: requestEntity.name,
         phone: requestEntity.phone,
@@ -72,12 +76,14 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, PhoneResponseEntity>> customerPhone(
+  Future<Either<Failure, PhoneResponseEntity>> sendPhone(
       PhoneRequestEntity requestEntity) async {
+    debugPrint('customerPhone ishga tushdi >>>>>>>> ');
+
     final phoneModel = PhoneRequestModel(phone: requestEntity.phone);
     if (await networkInfo.isConnected) {
       try {
-        final response = await authRemoteDataSource.customerPhone(phoneModel);
+        final response = await authRemoteDataSource.sendPhone(phoneModel);
         return Right(response.toEntity());
       } catch (e) {
         return Left(ServerFailure(message: e.toString()));
@@ -90,6 +96,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, ConfirmResponseEntity>> confirmLogin(
       ConfirmRequestEntity requestEntity) async {
+    debugPrint('confirmLogin ishga tushdi >>>>>>>> ');
+
     final confirmLoginModel = ConfirmRequestModel(
       fcmToken: requestEntity.fcmToken,
       phone: requestEntity.phone,
@@ -111,6 +119,8 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, ConfirmResponseEntity>> confirmRegister(
       ConfirmRequestEntity requestEntity) async {
+    debugPrint('confirmRegister ishga tushdi >>>>>>>> ');
+
     final confirmRegisterModel = ConfirmRequestModel(
       fcmToken: requestEntity.fcmToken,
       phone: requestEntity.phone,

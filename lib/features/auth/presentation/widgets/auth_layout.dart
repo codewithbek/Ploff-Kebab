@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ploff_kebab/export_files.dart';
 
-import '../../../../core/utils/app_utils.dart';
 
 class AuthLayout extends StatelessWidget {
   final String title;

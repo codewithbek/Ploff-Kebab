@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () {},
             child: Row(
               children: [
-                SvgPicture.asset(AppIcons.location),
+                SvgPicture.asset(AppIcons.location, height: 15.h),
                 SizedBox(width: 10.w),
                 Text(
                   'Add Location',

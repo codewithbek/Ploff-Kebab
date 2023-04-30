@@ -3,7 +3,7 @@ import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/login.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/register.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
-import 'package:ploff_kebab/features/auth/presentation/bloc/register_bloc/register_bloc.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/login/login_page.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/detail/product_detail_page.dart';
@@ -32,7 +32,7 @@ class AppRoutes {
       case RouteNames.login:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => LoginBloc(signIn: sl<Login>()),
+            create: (context) => LoginBloc(login: sl<LoginUseCase>()),
             child: const LoginPage(),
           ),
         );
@@ -44,7 +44,7 @@ class AppRoutes {
           ),
         );
 
-         case RouteNames.pinPut:
+      case RouteNames.pinPut:
         return CupertinoPageRoute(
           builder: (_) => const ConfirmCodePage(),
         );

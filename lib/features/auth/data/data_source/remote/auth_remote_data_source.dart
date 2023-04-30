@@ -19,7 +19,7 @@ abstract class AuthRemoteDataSource {
   Future<AuthMessageResponseModel> register(
       RegisterRequestModel signUpRequestModel);
 
-  Future<PhoneResponseModel> customerPhone(PhoneRequestModel phoneRequestModel);
+  Future<PhoneResponseModel> sendPhone(PhoneRequestModel phoneRequestModel);
 
   Future<ConfirmResponseModel> confirmRegister(
       ConfirmRequestModel confirmRequestModel);

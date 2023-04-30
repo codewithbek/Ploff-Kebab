@@ -1,51 +1,45 @@
 part of 'login_bloc.dart';
 
+enum LoginStatus { initial, loading, success, error }
+
 abstract class LoginState extends Equatable {
   const LoginState();
 }
 
 class LoginPhoneNumberState extends LoginState {
-  final String phoneNumber;
+  final String phone;
+  final String tag;
   final LoginStatus status;
-
-  const LoginPhoneNumberState(
-      {this.phoneNumber = '', this.status = LoginStatus.initial});
+  final String message;
+  const LoginPhoneNumberState({
+    this.phone = '',
+    this.tag = '',
+    this.message = '',
+    this.status = LoginStatus.initial,
+  });
 
   LoginPhoneNumberState copyWith({
-    String? phoneNumber,
+    String? phone,
+    String? tag,
+    String? message,
     LoginStatus? status,
   }) {
     return LoginPhoneNumberState(
-      phoneNumber: phoneNumber ?? this.phoneNumber,
+      phone: phone ?? this.phone,
+      tag: tag ?? this.tag,
       status: status ?? this.status,
+      message: message ?? this.message,
     );
   }
 
   @override
-  List<Object?> get props => [phoneNumber, status];
+  List<Object?> get props => [
+        phone,
+        tag,
+        status,
+        message,
+      ];
 }
-
-class LoginCodeState extends LoginState {
-  final String code;
-  final LoginStatus status;
-
-  const LoginCodeState({this.code = '', this.status = LoginStatus.initial});
-
-  LoginCodeState copyWith({
-    String? code,
-    LoginStatus? status,
-  }) {
-    return LoginCodeState(
-      code: code ?? this.code,
-      status: status ?? this.status,
-    );
-  }
-
-  @override
-  List<Object?> get props => [code, status];
-}
-
-enum LoginStatus { initial, loading, success, error }
 
 extension LoginStatusX on LoginStatus {
   bool get isInitial => this == LoginStatus.initial;

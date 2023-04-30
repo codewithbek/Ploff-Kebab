@@ -155,47 +155,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
             ),
           ),
           AppUtils.kSpacer,
-          // SafeArea(
-          //   minimum: AppUtils.kPaddingAll16,
-          //   child: ElevatedButton(
-          //     // onPressed: state.status.isLoading
-          //     //     ? null
-          //     //     : () {
-          //     //   debugPrint("phone number : +${phoneNumberController.text.trim().replaceAll(' ', '')}");
-          //     //   if(state.country?.mask.trim().replaceAll(' ', '').length==phoneNumberController.text.trim().replaceAll(' ', '').length){
-          //     //
-          //     //     context.read<LoginBloc>().add(
-          //     //       SendCodeEvent(
-          //     //         request: SendCodeRequest(
-          //     //           recipient:
-          //     //           '+${phoneNumberController.text.trim().replaceAll(' ', '')}',
-          //     //           text: "",
-          //     //         ),
-          //     //         phoneCode: state.phoneNumber ?? "",
-          //     //       ),
-          //     //     );
-          //     //   }else{
-          //     //     CustomSnackBar.showErrorSnackBar(context: context, message: "Invalid Number");
-          //     //     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid phone number")));
-          //     //   }
-          //     //
-          //     // },
-          //     // style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color(0xffF1F1F1))),
-          //     onPressed: putLenght != 6
-          //         ? null
-          //         : () {
-          //             // Navigator.pushNamed(
-          //             //     rootNavigatorKey.currentContext!, Routes.enterDetail);
-          //           },
-          //     child: const Text(
-          //       "Continue",
-          //       style: TextStyle(
-          //         fontSize: 15, fontWeight: FontWeight.w600,
-          //         // color: Color(0xffB5B5B5,),
-          //       ),
-          //     ),
-          //   ),
-          // )
+
           SafeArea(
             minimum: AppUtils.kPaddingAll16,
             child: PrimaryButtonWidget(

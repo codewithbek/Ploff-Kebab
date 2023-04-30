@@ -12,7 +12,7 @@ abstract class AuthRepository {
   Future<Either<Failure, AuthMessageResponseEntity>> login(
       LoginRequestEntity requestEntity);
 
-  Future<Either<Failure, PhoneResponseEntity>> customerPhone(
+  Future<Either<Failure, PhoneResponseEntity>> sendPhone(
       PhoneRequestEntity requestEntity);
 
   Future<Either<Failure, ConfirmResponseEntity>> confirmRegister(

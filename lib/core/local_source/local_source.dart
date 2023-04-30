@@ -36,35 +36,27 @@ class LocalSource {
   }
 
   void setAccessToken(String accessToken) {
-    box.put(AppKeys.ACCESSTOKEN, accessToken);
+    box.put(AppKeys.ACCESS_TOKEN, accessToken);
   }
 
   String? getAccessToken() {
-    return box.get(AppKeys.ACCESSTOKEN);
+    return box.get(AppKeys.ACCESS_TOKEN);
   }
 
-  void setFirstName(String firstName) {
-    box.put(AppKeys.FIRSTNAME, firstName);
+  void setName(String firstName) {
+    box.put(AppKeys.NAME, firstName);
   }
 
-  String? getFirstName() {
-    return box.get(AppKeys.FIRSTNAME);
+  String? getName() {
+    return box.get(AppKeys.NAME);
   }
 
-  void setEmail(String email) {
-    box.put(AppKeys.EMAIL, email);
+  void setPhone(String phone) {
+    box.put(AppKeys.PHONE, phone);
   }
 
-  String? getEmail() {
-    return box.get(AppKeys.EMAIL);
-  }
-
-  void setPassword(String password) {
-    box.put(AppKeys.PASSWORD, password);
-  }
-
-  String? getPassword() {
-    return box.get(AppKeys.PASSWORD);
+  String? getPhone() {
+    return box.get(AppKeys.PHONE);
   }
 
   void setProfile(bool auth) {

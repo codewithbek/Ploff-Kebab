@@ -7,17 +7,14 @@ class Constants {
 }
 
 class Validations {
-  static const EMAIL_EMPTY = 'Email cannot be empty';
-  static const NOT_EMAIL = 'This is not email';
+  static const PHONE_EMPTY = 'Phone cannot be empty';
+  static const NOT_PHONE = 'This is not phone';
   static const PASSWORD_EMPTY = 'Password cannot be empty';
   static const PASSWORD_SHORT = 'Password too short';
   static const PASSWORD_LONG = 'Password too long';
-  static const FIRSTNAME_EMPTY = 'Firstname cannot be empty';
-  static const FIRSTNAME_SHORT = 'Firstname too short';
-  static const FIRSTNAME_LONG = 'Firstname too long';
-  static const LASTNAME_EMPTY = 'Last name cannot be empty';
-  static const LASTNAME_SHORT = 'Lastname too short';
-  static const LASTNAME_LONG = 'Lastname too long';
+  static const NAME_EMPTY = 'Name cannot be empty';
+  static const NAME_SHORT = 'Name too short';
+  static const NAME_LONG = 'Name too long';
   static const PASSWORD_NOT_MATCH = 'Passwords do not match';
   static const INTERNET_FAILURE = 'No Internet';
   static const SOMETHING_WENT_WRONG = 'Something went wrong!';
@@ -25,10 +22,12 @@ class Validations {
 
 class AppKeys {
   static const LOCALE = 'locale';
-  static const ACCESSTOKEN = 'fcm_token';
-  static const FIRSTNAME = 'firstname';
-  static const EMAIL = 'email';
-  static const PASSWORD = 'password';
+  static const FCM_TOKEN = 'fcm_token';
+  static const ACCESS_TOKEN = 'access_token';
+  static const REFRESH_TOKEN = 'refresh_token';
+
+  static const NAME = 'name';
+  static const PHONE = 'phone';
   static const pinCode = 'pincode';
   static const biometrics = 'biometrics';
   static const hasProfile = 'auth';

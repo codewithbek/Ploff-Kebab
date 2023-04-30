@@ -3,7 +3,7 @@ import 'package:ploff_kebab/features/auth/data/data_source/local/auth_local_data
 import 'package:ploff_kebab/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/confirm_login.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/confirm_register.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/customer_phone.dart';
+import 'package:ploff_kebab/features/auth/domain/usecases/send_phone.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/login.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/register.dart';
 
@@ -45,7 +45,7 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
   sl.registerSingleton<LocalSource>(LocalSource(box));
 
-  // authFeature();
+  authFeature();
   mainFeature();
   homeFeature();
 }
@@ -97,12 +97,15 @@ void homeFeature() {
 //-----------------------------------------
 
 void authFeature() {
+  
   ///Usecases
-  sl.registerLazySingleton<Login>(() => Login(sl()));
+  sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<Register>(() => Register(sl()));
-  sl.registerLazySingleton<ConfirmLogin>(() => ConfirmLogin(sl()));
-  sl.registerLazySingleton<ConfirmRegister>(() => ConfirmRegister(sl()));
-  sl.registerLazySingleton<CustomerPhone>(() => CustomerPhone(sl()));
+  sl.registerLazySingleton<ConfirmLoginUseCase>(
+      () => ConfirmLoginUseCase(sl()));
+  sl.registerLazySingleton<ConfirmRegisterUseCase>(
+      () => ConfirmRegisterUseCase(sl()));
+  sl.registerLazySingleton<SendPhone>(() => SendPhone(sl()));
 
   ///Repositories
   sl.registerLazySingleton<AuthRepository>(

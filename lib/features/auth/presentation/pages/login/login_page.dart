@@ -92,13 +92,20 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
             ),
           ),
           AppUtils.kSpacer,
-          SafeArea(
-            minimum: AppUtils.kPaddingAll16,
-            child: PrimaryButtonWidget(
-                text: "Procced",
-                onTap: () {
-                  Navigator.pushNamed(context, RouteNames.register);
-                }),
+          BlocBuilder<LoginBloc, AuthLoginState>(
+            builder: (context, state) {
+              return SafeArea(
+                minimum: AppUtils.kPaddingAll16,
+                child: PrimaryButtonWidget(
+                    text: "Procced",
+                    onTap: () async {
+                      context.read<LoginBloc>().add(
+                          LoginPhoneButtonPressedEvent(
+                              phoneNumber: phoneNumberController.text));
+                      Navigator.pushNamed(context, RouteNames.register);
+                    }),
+              );
+            },
           )
         ],
       ),
@@ -168,11 +175,11 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
   }
 }
 
-extension LoginStateX on LoginState {
+extension LoginStateX on AuthLoginState {
   Function()? onPressed(BuildContext context, [String? phone, String? code]) {
     switch (runtimeType) {
-      case LoginPhoneNumberState:
-        if ((this as LoginPhoneNumberState).phoneNumber.isNotEmpty) {
+      case LoginState:
+        if ((this as LoginState).phoneNumber.isNotEmpty) {
           return () {
             context.read<LoginBloc>().add(
                   LoginPhoneButtonPressedEvent(

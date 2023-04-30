@@ -26,8 +26,9 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failure, CategoriesWithProductsEntity>> getCategoriesWithProducts() async {
-    debugPrint('>>>>>>>>kirdi ');
+  Future<Either<Failure, CategoriesWithProductsEntity>>
+      getCategoriesWithProducts() async {
+    debugPrint('CategoryWithProductga kirdi >>>>>>>> ');
     bool isConnected = await networkInfo.isConnected;
     if (!isConnected) {
       return Left(NoInternetFailure());

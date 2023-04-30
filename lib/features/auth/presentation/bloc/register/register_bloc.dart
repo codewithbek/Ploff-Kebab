@@ -1,6 +1,5 @@
-import 'package:ploff_kebab/core/inputs/email_input.dart';
+import 'package:ploff_kebab/core/inputs/phone_input.dart';
 import 'package:ploff_kebab/core/inputs/name_input.dart';
-import 'package:ploff_kebab/core/inputs/password_input.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/core/mixins/register_validation.dart';
 import 'package:ploff_kebab/export_files.dart';
@@ -23,14 +22,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
   void _registerButtonPressedHandler(
       RegisterButtonPressed event, Emitter<RegisterState> emit) async {
     final name = NameInput.dirty(event.name.trim());
-    final phone = EmailInput.dirty(event.registrationSource.trim());
     emit(const RegisterState(status: RegisterStatus.loading));
-    Map<RegisterInputErrors, String>? errorMessage =
-        validateRegister(name, phone);
+    Map<dynamic, String>? errorMessage = validateRegister(name);
     if (errorMessage == null) {
       final request = RegisterRequestEntity(
         name: name.value,
-        phone: phone.value,
+        phone: event.phone,
+        tag: event.tag,
+        registrationSource: event.registrationSource,
       );
       final response = await signUp(Params(request));
       response.fold(
@@ -43,12 +42,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
           ),
         ),
         (response) {
-          // setUserInfo(
-          //   firstName: name.value,
-          //   phone: phone.value,
-          //   token: response.token ?? 'empty',
-          //   password: '',
-          // );
+          setUserInfo(
+            name: name.value,
+            phone: event.phone
+          );
           emit(
             const RegisterState(status: RegisterStatus.success),
           );

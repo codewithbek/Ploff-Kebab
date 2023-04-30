@@ -55,7 +55,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<PhoneResponseModel> customerPhone(
+  Future<PhoneResponseModel> sendPhone(
       PhoneRequestModel phoneRequestModel) async {
     try {
       final response = await dio.post(

@@ -1,5 +1,6 @@
 import 'package:ploff_kebab/core/widgets/custom_text_field.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -66,13 +67,17 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
           AppUtils.kSpacer,
-          SafeArea(
-            minimum: AppUtils.kPaddingAll16,
-            child: PrimaryButtonWidget(
-                text: "Continue",
-                onTap: () {
-                  Navigator.pushNamed(context, RouteNames.pinPut);
-                }),
+          BlocBuilder<RegisterBloc, RegisterState>(
+            builder: (context, state) {
+              return SafeArea(
+                minimum: AppUtils.kPaddingAll16,
+                child: PrimaryButtonWidget(
+                    text: "Continue",
+                    onTap: () {
+                      Navigator.pushNamed(context, RouteNames.pinPut);
+                    }),
+              );
+            },
           ),
         ],
       ),
