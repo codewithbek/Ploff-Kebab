@@ -3,10 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/phone/phone_request_entity.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/phone/phone_response_entity.dart';
 
-class SendPhone extends UseCase<PhoneResponseEntity, Params> {
+class SendPhoneUseCase extends UseCase<PhoneResponseEntity, Params> {
   final AuthRepository authRepository;
 
-  SendPhone(this.authRepository);
+  SendPhoneUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, PhoneResponseEntity>> call(Params params) async {

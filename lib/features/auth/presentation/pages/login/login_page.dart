@@ -18,7 +18,6 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
     super.initState();
   }
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String errorText = "";
 
   @override
@@ -92,20 +91,13 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
             ),
           ),
           AppUtils.kSpacer,
-          BlocBuilder<LoginBloc, AuthLoginState>(
-            builder: (context, state) {
-              return SafeArea(
-                minimum: AppUtils.kPaddingAll16,
-                child: PrimaryButtonWidget(
-                    text: "Procced",
-                    onTap: () async {
-                      context.read<LoginBloc>().add(
-                          LoginPhoneButtonPressedEvent(
-                              phoneNumber: phoneNumberController.text));
-                      Navigator.pushNamed(context, RouteNames.register);
-                    }),
-              );
-            },
+          SafeArea(
+            minimum: AppUtils.kPaddingAll16,
+            child: PrimaryButtonWidget(
+                text: "Procced",
+                onTap: () async {
+                  Navigator.pushNamed(context, RouteNames.register);
+                }),
           )
         ],
       ),
@@ -172,38 +164,5 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
   void dispose() {
     disposeControllers();
     super.dispose();
-  }
-}
-
-extension LoginStateX on AuthLoginState {
-  Function()? onPressed(BuildContext context, [String? phone, String? code]) {
-    switch (runtimeType) {
-      case LoginState:
-        if ((this as LoginState).phoneNumber.isNotEmpty) {
-          return () {
-            context.read<LoginBloc>().add(
-                  LoginPhoneButtonPressedEvent(
-                    phoneNumber: phone ?? '',
-                  ),
-                );
-          };
-        } else {
-          return null;
-        }
-      case LoginCodeState:
-        if ((this as LoginCodeState).code.isNotEmpty) {
-          return () {
-            context.read<LoginBloc>().add(
-                  LoginCodeButtonPressedEvent(
-                    code: code ?? '',
-                  ),
-                );
-          };
-        } else {
-          return null;
-        }
-      default:
-        return null;
-    }
   }
 }

@@ -3,8 +3,8 @@ import 'package:ploff_kebab/core/inputs/name_input.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/core/mixins/register_validation.dart';
 import 'package:ploff_kebab/export_files.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/register.dart';
-import '../../../domain/usecases/register.dart';
+import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
+import '../../../domain/usecases/register_usecase.dart';
 
 part 'register_event.dart';
 
@@ -12,7 +12,7 @@ part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
     with RegisterValidation, CacheMixin {
-  final Register signUp;
+  final RegisterUseCase signUp;
 
   RegisterBloc({required this.signUp})
       : super(const RegisterState(status: RegisterStatus.initial)) {
@@ -42,10 +42,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
           ),
         ),
         (response) {
-          setUserInfo(
-            name: name.value,
-            phone: event.phone
-          );
+          setUserInfo(name: name.value, phone: event.phone);
           emit(
             const RegisterState(status: RegisterStatus.success),
           );

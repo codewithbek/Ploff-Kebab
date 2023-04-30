@@ -2,6 +2,16 @@ part of 'login_bloc.dart';
 
 enum LoginStatus { initial, loading, success, error }
 
+extension LoginStatusX on LoginStatus {
+  bool get isInitial => this == LoginStatus.initial;
+
+  bool get isLoading => this == LoginStatus.loading;
+
+  bool get isSuccess => this == LoginStatus.success;
+
+  bool get isError => this == LoginStatus.error;
+}
+
 abstract class LoginState extends Equatable {
   const LoginState();
 }
@@ -39,14 +49,4 @@ class LoginPhoneNumberState extends LoginState {
         status,
         message,
       ];
-}
-
-extension LoginStatusX on LoginStatus {
-  bool get isInitial => this == LoginStatus.initial;
-
-  bool get isLoading => this == LoginStatus.loading;
-
-  bool get isSuccess => this == LoginStatus.success;
-
-  bool get isError => this == LoginStatus.error;
 }

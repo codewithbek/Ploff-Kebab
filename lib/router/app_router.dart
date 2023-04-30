@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ploff_kebab/export_files.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/login.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/register.dart';
+import 'package:ploff_kebab/features/auth/domain/usecases/login_usecase.dart';
+import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
@@ -39,7 +39,7 @@ class AppRoutes {
       case RouteNames.register:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => RegisterBloc(signUp: sl<Register>()),
+            create: (context) => RegisterBloc(signUp: sl<RegisterUseCase>()),
             child: const RegisterPage(),
           ),
         );

@@ -2,11 +2,21 @@ part of 'register_bloc.dart';
 
 enum RegisterStatus { initial, loading, error, success }
 
- class RegisterState extends Equatable {
+extension RegisterStatusX on RegisterStatus {
+  bool get isInitial => this == RegisterStatus.initial;
+
+  bool get isLoading => this == RegisterStatus.loading;
+
+  bool get isSuccess => this == RegisterStatus.success;
+
+  bool get isError => this == RegisterStatus.error;
+}
+
+class RegisterState extends Equatable {
   final String? message;
   final RegisterInputsErrors? errors;
   final RegisterStatus status;
-
+  
   const RegisterState({this.message, this.errors, required this.status});
 
   @override
@@ -21,8 +31,6 @@ enum RegisterStatus { initial, loading, error, success }
     );
   }
 }
-
-
 
 enum RegisterInputsErrors {
   name,
