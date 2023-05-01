@@ -1,5 +1,7 @@
 import 'package:pinput/pinput.dart';
+import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 
 class ConfirmCodePage extends StatefulWidget {
   const ConfirmCodePage({Key? key}) : super(key: key);
@@ -8,7 +10,7 @@ class ConfirmCodePage extends StatefulWidget {
   State<ConfirmCodePage> createState() => _ConfirmCodePageState();
 }
 
-class _ConfirmCodePageState extends State<ConfirmCodePage> {
+class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
   final defaultPinTheme = PinTheme(
     width: 60,
     height: 60,
@@ -155,15 +157,30 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> {
             ),
           ),
           AppUtils.kSpacer,
-
-          SafeArea(
-            minimum: AppUtils.kPaddingAll16,
-            child: PrimaryButtonWidget(
-                text: "Continue",
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, RouteNames.main, (route) => false);
-                }),
+          BlocBuilder<ConfirmCodeBloc, ConfirmCodeState>(
+            builder: (context, state) {
+              return SafeArea(
+                minimum: AppUtils.kPaddingAll16,
+                child: PrimaryButtonWidget(
+                    text: "Continue",
+                    onTap: () async {
+                      if (state.userStatus == ConfirmStatus.authenticated) {
+                        context.read<ConfirmCodeBloc>().add(
+                            LoginConfirmCodeEvent(
+                                code: putController.text,
+                                phone: localSource.getPhone().toString()));
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, RouteNames.main, (route) => false);
+                      }
+                      context.read<ConfirmCodeBloc>().add(
+                          RegisterConfirmCodeEvent(
+                              code: putController.text,
+                              phone: localSource.getPhone().toString()));
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, RouteNames.main, (route) => false);
+                    }),
+              );
+            },
           ),
         ],
       ),

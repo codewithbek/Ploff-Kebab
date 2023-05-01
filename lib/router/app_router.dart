@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
@@ -43,9 +44,12 @@ class AppRoutes {
           ),
         );
 
-      case RouteNames.pinPut:
+      case RouteNames.confirmCode:
         return CupertinoPageRoute(
-          builder: (_) => const ConfirmCodePage(),
+          builder: (_) => BlocProvider(
+            create: (context) => sl<ConfirmCodeBloc>(),
+            child: const ConfirmCodePage(),
+          ),
         );
       case RouteNames.main:
         return CupertinoPageRoute(

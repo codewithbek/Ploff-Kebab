@@ -3,6 +3,7 @@ import 'package:ploff_kebab/core/inputs/name_input.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/core/mixins/register_validation.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/auth/domain/usecases/confirm_register_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
 import '../../../domain/usecases/register_usecase.dart';
 
@@ -14,15 +15,16 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
     with RegisterValidation, CacheMixin {
   final RegisterUseCase signUp;
 
-  RegisterBloc({required this.signUp})
-      : super(const RegisterState(status: RegisterStatus.initial)) {
+  RegisterBloc({
+    required this.signUp,
+  }) : super(const RegisterState(status: FormzSubmissionStatus.initial)) {
     on<RegisterButtonPressed>(_registerButtonPressedHandler);
   }
 
   void _registerButtonPressedHandler(
       RegisterButtonPressed event, Emitter<RegisterState> emit) async {
     final name = NameInput.dirty(event.name.trim());
-    emit(const RegisterState(status: RegisterStatus.loading));
+    emit(const RegisterState(status: FormzSubmissionStatus.inProgress));
     Map<dynamic, String>? errorMessage = validateRegister(name);
     if (errorMessage == null) {
       final request = RegisterRequestEntity(
@@ -35,7 +37,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
       response.fold(
         (error) => emit(
           RegisterState(
-            status: RegisterStatus.error,
+            status: FormzSubmissionStatus.failure,
             message: (error is ServerFailure)
                 ? error.message
                 : Validations.INTERNET_FAILURE,
@@ -44,14 +46,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
         (response) {
           setUserInfo(name: name.value, phone: event.phone);
           emit(
-            const RegisterState(status: RegisterStatus.success),
+            const RegisterState(status: FormzSubmissionStatus.success),
           );
         },
       );
     } else {
       emit(
         state.copyWith(
-          status: RegisterStatus.error,
+          status: FormzSubmissionStatus.failure,
           message: errorMessage.values.first,
           errors: errorMessage.keys.first,
         ),

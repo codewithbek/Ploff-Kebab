@@ -12,7 +12,7 @@ class RouteNames {
   /// auth
   static const login = '/login';
   static const register = '/register';
-  static const pinPut = '/pin_put';
+  static const confirmCode = '/confirm_code';
   static const enterDetail = '/enter_detail';
 
   ///Profile

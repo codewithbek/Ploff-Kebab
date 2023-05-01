@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> with CacheMixin {
                                 registrationSource: "app",
                                 tag: ""),
                           );
-                      // Navigator.pushNamed(context, RouteNames.pinPut);
+                      Navigator.pushNamed(context, RouteNames.confirmCode);
                     }),
               );
             },

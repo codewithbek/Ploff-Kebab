@@ -1,10 +1,20 @@
 part of 'confirm_code_bloc.dart';
 
-abstract class ConfirmCodeState extends Equatable {
-  const ConfirmCodeState();
+class ConfirmCodeState extends Equatable {
+  final FormzSubmissionStatus status;
+  final ConfirmStatus? userStatus;
+  final String? message;
+  const ConfirmCodeState({
+    required this.status,
+     this.userStatus,
+    this.message,
+  });
+
+  @override
+  List<Object?> get props => [
+        message,
+        status,
+      ];
 }
 
-class ConfirmCodeInitial extends ConfirmCodeState {
-  @override
-  List<Object> get props => [];
-}
+enum ConfirmStatus { uninitialized, authenticated, unauthenticated }

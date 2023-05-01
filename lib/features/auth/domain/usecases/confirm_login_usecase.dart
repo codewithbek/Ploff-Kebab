@@ -3,23 +3,25 @@ import 'package:dartz/dartz.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_request_entity.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_response_etity.dart';
 
-class ConfirmLoginUseCase extends UseCase<ConfirmResponseEntity, Params> {
+class ConfirmLoginUseCase
+    extends UseCase<ConfirmResponseEntity, ConfirmLoginParams> {
   final AuthRepository authRepository;
 
   ConfirmLoginUseCase(this.authRepository);
 
   @override
-  Future<Either<Failure, ConfirmResponseEntity>> call(Params params) async {
+  Future<Either<Failure, ConfirmResponseEntity>> call(
+      ConfirmLoginParams params) async {
     final response =
         await authRepository.confirmLogin(params.confirmLoginRequestEntity);
     return response;
   }
 }
 
-class Params extends Equatable {
+class ConfirmLoginParams extends Equatable {
   final ConfirmRequestEntity confirmLoginRequestEntity;
 
-  const Params({required this.confirmLoginRequestEntity});
+  const ConfirmLoginParams(this.confirmLoginRequestEntity);
 
   @override
   List<Object?> get props => [confirmLoginRequestEntity];

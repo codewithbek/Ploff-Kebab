@@ -6,6 +6,7 @@ import 'package:ploff_kebab/features/auth/domain/usecases/confirm_register_useca
 import 'package:ploff_kebab/features/auth/domain/usecases/send_phone_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/login_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/home/domain/usecases/search_product.dart';
@@ -110,6 +111,8 @@ void authFeature() {
     () => LoginBloc(login: sl(), sendPhone: sl()),
   );
   sl.registerLazySingleton(() => RegisterBloc(signUp: sl()));
+  sl.registerLazySingleton(
+      () => ConfirmCodeBloc(confirmLogin: sl(), confirmRegister: sl()));
 
   ///Usecases
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));

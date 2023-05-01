@@ -1,24 +1,24 @@
-
 import 'package:ploff_kebab/export_files.dart';
 import 'package:dartz/dartz.dart';
 
-class LoginUseCase extends UseCase<AuthMessageResponseEntity, Params> {
+class LoginUseCase extends UseCase<AuthMessageResponseEntity, LoginParams> {
   final AuthRepository authRepository;
 
   LoginUseCase(this.authRepository);
 
   @override
-  Future<Either<Failure, AuthMessageResponseEntity>> call(Params params) async {
-    final response = await authRepository.login(params.signInRequestEntity);
+  Future<Either<Failure, AuthMessageResponseEntity>> call(
+      LoginParams params) async {
+    final response = await authRepository.login(params.loginRequestEntity);
     return response;
   }
 }
 
-class Params extends Equatable {
-  final LoginRequestEntity signInRequestEntity;
+class LoginParams extends Equatable {
+  final LoginRequestEntity loginRequestEntity;
 
-  const Params({required this.signInRequestEntity});
+  const LoginParams(this.loginRequestEntity);
 
   @override
-  List<Object?> get props => [signInRequestEntity];
+  List<Object?> get props => [loginRequestEntity];
 }

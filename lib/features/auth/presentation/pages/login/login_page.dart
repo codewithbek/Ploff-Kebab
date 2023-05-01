@@ -23,7 +23,6 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
   @override
   Widget build(BuildContext context) {
     // final localization = AppLocalization.of(context);
-    // final mediaQuery = MediaQuery.of(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: AppBar(
@@ -96,15 +95,20 @@ class _LoginPageState extends State<LoginPage> with LoginMixin {
               return SafeArea(
                 minimum: AppUtils.kPaddingAll16,
                 child: PrimaryButtonWidget(
-                    text: "Procced",
-                    onTap: () async {
-                      var phone =
-                          phoneNumberController.text.trim().replaceAll(' ', '');
-                      context
-                          .read<LoginBloc>()
-                          .add(LoginSendPhoneNumberEvent(phone: "+998$phone"));
+                  text: "Procced",
+                  onTap: () async {
+                    var phone =
+                        phoneNumberController.text.trim().replaceAll(' ', '');
+                    context
+                        .read<LoginBloc>()
+                        .add(LoginSendPhoneNumberEvent(phone: "+998$phone"));
+                    if (state.userStatus == UserAuthStatus.authenticated) {
+                      Navigator.pushNamed(context, RouteNames.confirmCode);
+                    } else {
                       Navigator.pushNamed(context, RouteNames.register);
-                    }),
+                    }
+                  },
+                ),
               );
             },
           )

@@ -18,7 +18,7 @@ mixin LoginMixin {
     codeFocus = FocusNode();
   }
 
-  void pageMovement(LoginSendPhoneNumberState state) {
+  void pageMovement(LoginState state) {
     switch (state.runtimeType) {
       case LoginState:
         pageController.animateToPage(0,
