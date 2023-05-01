@@ -44,7 +44,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
           ),
         ),
         (response) {
-          setUserInfo(name: name.value, phone: event.phone);
+          setName(
+            name: name.value,
+          );
           emit(
             const RegisterState(status: FormzSubmissionStatus.success),
           );

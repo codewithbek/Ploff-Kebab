@@ -29,6 +29,7 @@ Future<void> init() async {
         connectTimeout: const Duration(seconds: 30),
         headers: {
           "Shipper": Constants.shipperId,
+          "Platform": Constants.androidPlatformID,
         },
       )
       ..interceptors.addAll(
@@ -107,11 +108,11 @@ void homeFeature() {
 
 void authFeature() {
   ///Bloc
-  sl.registerLazySingleton(
+  sl.registerFactory(
     () => LoginBloc(login: sl(), sendPhone: sl()),
   );
-  sl.registerLazySingleton(() => RegisterBloc(signUp: sl()));
-  sl.registerLazySingleton(
+  sl.registerFactory(() => RegisterBloc(signUp: sl()));
+  sl.registerFactory(
       () => ConfirmCodeBloc(confirmLogin: sl(), confirmRegister: sl()));
 
   ///Usecases

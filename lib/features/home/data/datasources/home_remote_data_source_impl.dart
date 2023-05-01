@@ -26,7 +26,9 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   Future<CategoriesWithProductsModel> getCategoriesWithProducts() async {
     try {
       final response = await dio.get(
-        "${Constants.baseUrl}${Urls.GET_CATEGORIES_WITH_PRODUCTS_URL}",
+        "${Constants.baseUrl}${Urls.GET_CATEGORIES_WITH_PRODUCTS_URL}",options: Options(headers: {
+          
+        })
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         return CategoriesWithProductsModel.fromJson(response.data);

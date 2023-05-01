@@ -21,4 +21,9 @@ mixin CacheMixin {
     localSource.setPhone(phone);
     // localSource.setAccessToken(token);
   }
+  void setName({
+    required String name,
+  }) {
+    localSource.setName(name);
+  }
 }
