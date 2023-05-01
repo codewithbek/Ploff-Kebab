@@ -3,6 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:ploff_kebab/features/home/data/models/product_model/product_model.dart';
 import 'package:ploff_kebab/features/home/domain/entities/description_and_title_entity.dart';
 
+
+
 class ProductEntity extends Equatable {
   final String id;
   final int outPrice;

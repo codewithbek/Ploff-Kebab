@@ -78,7 +78,7 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, PhoneResponseEntity>> sendPhone(
       PhoneRequestEntity requestEntity) async {
-    debugPrint('customerPhone ishga tushdi >>>>>>>> ');
+    debugPrint('Telefon raqam jo\'natildi >>>>>>>> ');
 
     final phoneModel = PhoneRequestModel(phone: requestEntity.phone);
     if (await networkInfo.isConnected) {

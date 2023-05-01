@@ -1,9 +1,9 @@
 import 'package:ploff_kebab/core/constants/constants.dart';
 import 'package:ploff_kebab/core/inputs/name_input.dart';
-import 'package:ploff_kebab/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 
 mixin RegisterValidation {
-  Map<RegisterInputError, String>? validateRegister(
+  Map<RegisterInputsErrors, String>? validateRegister(
     NameInput name,
   ) {
     if (name.error == null) {
@@ -27,20 +27,20 @@ mixin RegisterValidation {
   //   }
   // }
 
-  Map<RegisterInputError, String>? firstNameValidation(NameInput firstName) {
+  Map<RegisterInputsErrors, String>? firstNameValidation(NameInput firstName) {
     switch (firstName.error) {
       case NameInputError.empty:
-        return {RegisterInputError.name: Validations.NAME_EMPTY};
+        return {RegisterInputsErrors.name: Validations.NAME_EMPTY};
       case NameInputError.short:
-        return {RegisterInputError.name: Validations.NAME_SHORT};
+        return {RegisterInputsErrors.name: Validations.NAME_SHORT};
       case NameInputError.long:
-        return {RegisterInputError.name: Validations.NAME_LONG};
+        return {RegisterInputsErrors.name: Validations.NAME_LONG};
       default:
         return null;
     }
   }
 
-  // Map<RegisterInputErrors, String>? phoneValidation(PhoneInput email) {
+  // Map<RegisterInputsErrors, String>? phoneValidation(PhoneInput email) {
   //   switch (email.error) {
   //     case PhoneInputError.empty:
   //       return {RegisterInputErrors.phone: Validations.PHONE_EMPTY};

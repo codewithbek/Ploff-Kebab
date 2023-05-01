@@ -1,3 +1,4 @@
+import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/core/widgets/custom_text_field.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
@@ -9,7 +10,7 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends State<RegisterPage> with CacheMixin {
   TextEditingController nameController = TextEditingController();
 
   @override
@@ -74,7 +75,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: PrimaryButtonWidget(
                     text: "Continue",
                     onTap: () {
-                      Navigator.pushNamed(context, RouteNames.pinPut);
+                      context.read<RegisterBloc>().add(
+                            RegisterButtonPressed(
+                                name: nameController.text,
+                                phone: localSource.getPhone().toString(),
+                                registrationSource: "app",
+                                tag: ""),
+                          );
+                      // Navigator.pushNamed(context, RouteNames.pinPut);
                     }),
               );
             },

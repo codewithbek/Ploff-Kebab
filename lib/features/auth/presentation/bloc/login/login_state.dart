@@ -16,25 +16,56 @@ abstract class LoginState extends Equatable {
   const LoginState();
 }
 
-class LoginPhoneNumberState extends LoginState {
+class LoginSendPhoneNumberState extends LoginState {
+  final String phone;
+  final LoginStatus status;
+  final String message;
+  const LoginSendPhoneNumberState({
+    this.phone = '',
+    this.message = '',
+    this.status = LoginStatus.initial,
+  });
+
+  LoginSendPhoneNumberState copyWith({
+    String? phone,
+    String? tag,
+    String? message,
+    LoginStatus? status,
+  }) {
+    return LoginSendPhoneNumberState(
+      phone: phone ?? this.phone,
+      status: status ?? this.status,
+      message: message ?? this.message,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        phone,
+        status,
+        message,
+      ];
+}
+
+class UserLoginState extends LoginState {
   final String phone;
   final String tag;
   final LoginStatus status;
   final String message;
-  const LoginPhoneNumberState({
+  const UserLoginState({
     this.phone = '',
     this.tag = '',
     this.message = '',
     this.status = LoginStatus.initial,
   });
 
-  LoginPhoneNumberState copyWith({
+  UserLoginState copyWith({
     String? phone,
     String? tag,
     String? message,
     LoginStatus? status,
   }) {
-    return LoginPhoneNumberState(
+    return UserLoginState(
       phone: phone ?? this.phone,
       tag: tag ?? this.tag,
       status: status ?? this.status,

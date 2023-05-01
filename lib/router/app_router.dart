@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ploff_kebab/export_files.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/login_usecase.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
+
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
@@ -32,14 +31,14 @@ class AppRoutes {
       case RouteNames.login:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => LoginBloc(login: sl<LoginUseCase>()),
+            create: (context) => sl<LoginBloc>(),
             child: const LoginPage(),
           ),
         );
       case RouteNames.register:
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => RegisterBloc(signUp: sl<RegisterUseCase>()),
+            create: (context) => sl<RegisterBloc>(),
             child: const RegisterPage(),
           ),
         );

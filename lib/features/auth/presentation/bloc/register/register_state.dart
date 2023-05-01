@@ -16,7 +16,7 @@ class RegisterState extends Equatable {
   final String? message;
   final RegisterInputsErrors? errors;
   final RegisterStatus status;
-  
+
   const RegisterState({this.message, this.errors, required this.status});
 
   @override

@@ -40,15 +40,16 @@ class CacheKeys {
 }
 
 class Urls {
-  static const SIGN_IN_URL = '/v1/customers/login/';
-  static const SIGN_UP_URL = '/v1/customers/register/';
+  static const SIGN_IN_URL = '/v1/customers/login';
+  static const SIGN_UP_URL = '/v1/customers/register';
   static const CUSTOMERS_PHONE = '/v1/customers/phone';
   static const REGISTER_CONFIRM = '/v1/customers/register-confirm';
   static const LOGIN_CONFIRM = '/v1/customers/confirm-login';
 
-  static const GET_CATEGORIES_WITH_PRODUCTS_URL = '/v2/category-with-products/';
-  static const GET_BANNER_URL = '/v1/banner/';
-  static const GET_OBJECT = '/v1/object/';
+  static const GET_CATEGORIES_WITH_PRODUCTS_URL = '/v2/category-with-products';
+  static const GET_BANNER_URL = '/v1/banner';
+
+  static const SEARCH_PRODUCT = '/v2/product';
 }
 
 class DatabaseKeys {

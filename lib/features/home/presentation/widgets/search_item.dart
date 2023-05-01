@@ -5,12 +5,12 @@ class CustomSearchItem extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged valueChanged;
 
+
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
       onChanged: valueChanged,
-      onTap: () async {},
       style: Theme.of(context).textTheme.titleMedium,
       cursorColor: Colors.grey,
       decoration: InputDecoration(

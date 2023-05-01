@@ -4,6 +4,14 @@ import '../local_source/local_source.dart';
 mixin CacheMixin {
   final localSource = sl<LocalSource>();
 
+  void setUserPhoneNumber({
+    required String phone,
+    // required String token,
+  }) {
+    localSource.setPhone(phone);
+    // localSource.setAccessToken(token);
+  }
+
   void setUserInfo({
     required String name,
     required String phone,

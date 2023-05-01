@@ -18,26 +18,27 @@ mixin LoginMixin {
     codeFocus = FocusNode();
   }
 
-  void pageMovement(AuthLoginState state) {
+  void pageMovement(LoginSendPhoneNumberState state) {
     switch (state.runtimeType) {
       case LoginState:
         pageController.animateToPage(0,
             duration: const Duration(milliseconds: 300),
             curve: Curves.easeInOut);
         break;
-      case LoginCodeState:
-        pageController.animateToPage(1,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.easeInOut);
-        break;
+      //   case LoginCodeState:
+      //     pageController.animateToPage(1,
+      //         duration: const Duration(milliseconds: 300),
+      //         curve: Curves.easeInOut);
+      //     break;
+      // }
     }
-  }
 
-  void disposeControllers() {
-    pageController.dispose();
-    phoneNumberController.dispose();
-    codeController.dispose();
-    phoneNumberFocus.dispose();
-    codeFocus.dispose();
+    void disposeControllers() {
+      pageController.dispose();
+      phoneNumberController.dispose();
+      codeController.dispose();
+      phoneNumberFocus.dispose();
+      codeFocus.dispose();
+    }
   }
 }

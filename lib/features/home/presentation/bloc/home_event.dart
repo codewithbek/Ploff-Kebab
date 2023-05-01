@@ -10,3 +10,12 @@ abstract class HomeEvent extends Equatable {
 class GetCategoriesWithProductsEvent extends HomeEvent {}
 
 class GetBannerEvent extends HomeEvent {}
+
+class SearchProductEvent extends HomeEvent {
+  final String productId;
+  const SearchProductEvent({required this.productId});
+  @override
+  List<Object> get props => [
+        productId,
+      ];
+}

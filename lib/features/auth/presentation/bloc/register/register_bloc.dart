@@ -31,7 +31,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>
         tag: event.tag,
         registrationSource: event.registrationSource,
       );
-      final response = await signUp(Params(request));
+      final response = await signUp(RegisterParams(request));
       response.fold(
         (error) => emit(
           RegisterState(

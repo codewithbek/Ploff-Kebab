@@ -55,7 +55,6 @@ class _HomePageState extends State<HomePage> {
               return CustomScrollView(
                 physics: const BouncingScrollPhysics(),
                 slivers: [
-                  // SEARCH ITEM AND CATEGORIES LIST
                   SliverPersistentHeader(
                     delegate: SliverHeaderDelegate(
                       controller: _controller,
@@ -87,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               );
             } else {
-              return LoadingWidget();
+              return const LoadingWidget();
             }
           },
         ));
