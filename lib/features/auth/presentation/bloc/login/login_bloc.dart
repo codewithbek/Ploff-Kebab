@@ -32,7 +32,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
     final response = await sendPhone(SendPhoneParams(request));
     response.fold(
       (error) {
-        setUserPhoneNumber(phone: event.phone);
         emit(
           LoginState(
             status: FormzSubmissionStatus.failure,
@@ -45,11 +44,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
       (response) {
         emit(
           const LoginState(
-              status: FormzSubmissionStatus.success,
-             ),
+            status: FormzSubmissionStatus.success,
+          ),
         );
       },
     );
+    setUserPhoneNumber(phone: event.phone);
   }
 
   void _userLogin(
@@ -71,8 +71,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
         );
       },
       (response) {
-        setUserPhoneNumber(phone: event.phone);
-
         emit(
           const LoginState(
             status: FormzSubmissionStatus.success,

@@ -7,6 +7,7 @@ import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bl
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/login/login_page.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/detail/product_detail_page.dart';
+import 'package:ploff_kebab/features/profile/presentation/settings/settings_page.dart';
 
 import '../features/auth/presentation/pages/register/register_page.dart';
 
@@ -69,6 +70,10 @@ class AppRoutes {
         ProductModel? args = settings.arguments as ProductModel?;
         return CupertinoPageRoute(
           builder: (_) => ProductDeatilPage(product: args),
+        );
+      case RouteNames.settings:
+        return CupertinoPageRoute(
+          builder: (_) => const SettingsPage(),
         );
     }
 

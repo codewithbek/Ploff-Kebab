@@ -56,12 +56,12 @@ Future<void> init() async {
 }
 
 void mainFeature() {
-  sl.registerLazySingleton(() => MainBloc());
+  sl.registerFactory(() => MainBloc());
 }
 
 void homeFeature() {
   ///Bloc
-  sl.registerLazySingleton(
+  sl.registerFactory(
     () => HomeBloc(
       getBanner: sl(),
       getCategoriesWithProductsUseCase: sl(),

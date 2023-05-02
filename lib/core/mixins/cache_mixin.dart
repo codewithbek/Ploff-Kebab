@@ -6,10 +6,8 @@ mixin CacheMixin {
 
   void setUserPhoneNumber({
     required String phone,
-    // required String token,
   }) {
     localSource.setPhone(phone);
-    // localSource.setAccessToken(token);
   }
 
   void setUserInfo({
@@ -21,6 +19,7 @@ mixin CacheMixin {
     localSource.setPhone(phone);
     // localSource.setAccessToken(token);
   }
+
   void setName({
     required String name,
   }) {

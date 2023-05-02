@@ -77,6 +77,7 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
                 : Validations.SOMETHING_WENT_WRONG,
           ),
         );
+        localSource.setProfile(true);
       },
       (r) {
         emit(
