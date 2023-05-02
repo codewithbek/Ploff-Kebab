@@ -43,6 +43,17 @@ class _CartPageState extends State<CartPage> {
           ],
         ),
       ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: AppUtils.kPaddingAll12,
+          child: PrimaryButtonWidget(
+            text: "Add product",
+            onTap: () {
+              Navigator.pushReplacementNamed(context, RouteNames.main);
+            },
+          ),
+        ),
+      ),
     );
   }
 }

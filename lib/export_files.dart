@@ -19,7 +19,6 @@ export 'package:hive/hive.dart';
 export 'package:flutter/foundation.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:formz/formz.dart';
-
 export 'package:json_annotation/json_annotation.dart';
 // files
 export 'package:ploff_kebab/app.dart';

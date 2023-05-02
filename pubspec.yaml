@@ -21,6 +21,7 @@ dependencies:
   get_it: ^7.2.0
   # UI
   flutter_svg: ^2.0.4
+  top_snackbar_flutter: ^3.0.0+1
   flutter_screenutil: ^5.7.0 #responsive
   flutter_native_splash: ^2.2.19
   chuck_interceptor: ^1.1.4 #chuck

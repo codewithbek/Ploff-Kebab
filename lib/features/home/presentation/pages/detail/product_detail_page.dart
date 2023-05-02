@@ -1,4 +1,6 @@
 import 'package:ploff_kebab/export_files.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ProductDeatilPage extends StatefulWidget {
   const ProductDeatilPage({super.key, this.product});
@@ -212,7 +214,15 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
               ),
               SizedBox(height: 15.0.h),
               PrimaryButtonWidget(
-                onTap: () {},
+                onTap: () {
+                  showTopSnackBar(
+                    Overlay.of(context),
+                    const CustomSnackBar.success(
+                      backgroundColor: AppColors.c22C348,
+                      message: 'Buyurtmangiz savatga qo\'shildi',
+                    ),
+                  );
+                },
                 text: "To Cart",
               ),
             ],
@@ -222,4 +232,3 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
     );
   }
 }
-

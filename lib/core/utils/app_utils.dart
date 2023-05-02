@@ -121,4 +121,7 @@ class AppUtils {
       ..removeCurrentSnackBar()
       ..showSnackBar(snackBar);
   }
+  
 }
+
+

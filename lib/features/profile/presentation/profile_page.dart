@@ -53,7 +53,9 @@ class _ProfilePageState extends State<ProfilePage> with CacheMixin {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    
+                  },
                   icon: SvgPicture.asset(AppIcons.edit),
                 )
               ],
@@ -89,6 +91,8 @@ class _ProfilePageState extends State<ProfilePage> with CacheMixin {
           GestureDetector(
             onTap: () {
               localSource.setProfile(false);
+              Navigator.pushNamedAndRemoveUntil(
+                  context, RouteNames.main, (route) => false);
             },
             child: Container(
               width: double.infinity,
