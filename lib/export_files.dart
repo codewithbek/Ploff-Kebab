@@ -51,7 +51,7 @@ export 'package:ploff_kebab/features/home/presentation/widgets/banner_item.dart'
 export 'package:ploff_kebab/features/home/presentation/widgets/category_item.dart';
 export 'package:ploff_kebab/features/home/presentation/widgets/category_with_products_item.dart';
 export 'package:ploff_kebab/features/home/presentation/widgets/search_item.dart';
-export 'package:ploff_kebab/features/home/data/datasources/home_remote_data_source.dart';
+export 'package:ploff_kebab/features/home/data/datasources/remote/home_remote_data_source.dart';
 export 'package:ploff_kebab/features/home/data/repository/home_repository_impl.dart';
 export 'package:ploff_kebab/features/home/domain/repository/home_repository.dart';
 export 'package:ploff_kebab/core/constants/constants.dart';

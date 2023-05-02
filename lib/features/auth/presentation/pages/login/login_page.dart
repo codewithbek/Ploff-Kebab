@@ -100,16 +100,21 @@ class _LoginPageState extends State<LoginPage> with LoginMixin, CacheMixin {
                   child: PrimaryButtonWidget(
                     text: "Procced",
                     onTap: () async {
-                      var phone =
-                          phoneNumberController.text.trim().replaceAll(' ', '');
-                      context
-                          .read<LoginBloc>()
-                          .add(LoginSendPhoneNumberEvent(phone: "+998$phone"));
-                      if (state.status == FormzSubmissionStatus.success) {
-                        context.read<LoginBloc>().add(UserLoginEvent(
-                            phone: localSource.getPhone().toString(),
-                            tag: "tag"));
-                        Navigator.pushNamed(context, RouteNames.confirmCode);
+                      if (phoneNumberController.text.isNotEmpty) {
+                        var phone = phoneNumberController.text
+                            .trim()
+                            .replaceAll(' ', '');
+                        context.read<LoginBloc>().add(LoginSendPhoneNumberEvent(
+                            phone: "+998$phone",
+                            onError: () {},
+                            onSucces: () {}));
+                        if (state.status == FormzSubmissionStatus.success) {
+                          context.read<LoginBloc>().add(UserLoginEvent(
+                              phone: localSource.getPhone().toString(),
+                              tag: "tag"));
+                          Navigator.pushNamed(context, RouteNames.confirmCode);
+                        }
+                        Navigator.pushNamed(context, RouteNames.register);
                       }
                     },
                   ),

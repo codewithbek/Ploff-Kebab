@@ -35,6 +35,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
         emit(
           LoginState(
             status: FormzSubmissionStatus.failure,
+            onError: event.onError,
             message: (error is ServerFailure)
                 ? error.message
                 : Validations.INTERNET_FAILURE,
@@ -42,11 +43,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
         );
       },
       (response) {
-        emit(
-          const LoginState(
-            status: FormzSubmissionStatus.success,
-          ),
-        );
+        emit(LoginState(
+          status: FormzSubmissionStatus.success,
+          onSucces: event.onSucces,
+        ));
+        event.onSucces;
       },
     );
     setUserPhoneNumber(phone: event.phone);

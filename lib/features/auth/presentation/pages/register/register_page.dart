@@ -75,14 +75,16 @@ class _RegisterPageState extends State<RegisterPage> with CacheMixin {
                 child: PrimaryButtonWidget(
                     text: "Continue",
                     onTap: () {
-                      context.read<RegisterBloc>().add(
-                            RegisterButtonPressed(
-                                name: nameController.text,
-                                phone: localSource.getPhone().toString(),
-                                registrationSource: "app",
-                                tag: ""),
-                          );
-                      Navigator.pushNamed(context, RouteNames.confirmCode);
+                      if (nameController.text.isNotEmpty) {
+                        context.read<RegisterBloc>().add(
+                              RegisterButtonPressed(
+                                  name: nameController.text,
+                                  phone: localSource.getPhone().toString(),
+                                  registrationSource: "app",
+                                  tag: ""),
+                            );
+                        Navigator.pushNamed(context, RouteNames.confirmCode);
+                      }
                     }),
               );
             },

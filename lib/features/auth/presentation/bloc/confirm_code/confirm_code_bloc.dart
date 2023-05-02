@@ -51,6 +51,7 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
             userStatus: ConfirmStatus.authenticated,
           ),
         );
+        localSource.setProfile(true);
       },
     );
   }

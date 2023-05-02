@@ -34,9 +34,9 @@ class AppKeys {
 }
 
 class CacheKeys {
-  static const String countries = 'countries';
-  static const String lounge = 'lounge';
-  static const String hall = 'hall';
+  static const String categoryWithProduct = 'categoryWithProduct';
+  static const String banners = 'banners';
+  static const String product = 'product';
 }
 
 class Urls {
