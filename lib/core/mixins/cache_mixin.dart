@@ -13,11 +13,13 @@ mixin CacheMixin {
   void setUserInfo({
     required String name,
     required String phone,
-    // required String token,
+    required String accessToken,
+    required String refreshToken,
   }) {
     localSource.setName(name);
     localSource.setPhone(phone);
-    // localSource.setAccessToken(token);
+    localSource.setAccessToken(accessToken);
+    localSource.setRefreshToken(refreshToken);
   }
 
   void setName({

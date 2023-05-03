@@ -1,77 +1,18 @@
 part of "home_local_data_source.dart";
 
-class HomeLocalDataSourceImpl extends HomeLocalDataSource {
+class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   final Box<dynamic> box;
 
   HomeLocalDataSourceImpl({required this.box});
-
-  // @override
-  Future<CategoriesWithProductsModel> getCategoriesWithProducts() async {
-    final json = await box.get(
-      CacheKeys.categoryWithProduct,
-      defaultValue: null,
-    );
-    if (json != null) {
-      return CategoriesWithProductsModel.fromJson(jsonDecode(json));
-    } else {
-      throw CacheException(message: Validations.SOMETHING_WENT_WRONG);
-    }
-  }
-
-  // @override
-  Future<ProductModel> getProduct() async {
-    final json = await box.get(
-      CacheKeys.product,
-      defaultValue: null,
-    );
-    if (json != null) {
-      return ProductModel.fromJson(jsonDecode(json));
-    } else {
-      throw CacheException(message: Validations.SOMETHING_WENT_WRONG);
-    }
-  }
-
-  // @override
-  Future<BannerModel> getBanners() async {
-    final json = await box.get(
-      CacheKeys.banners,
-      defaultValue: null,
-    );
-    if (json != null) {
-      return BannerModel.fromJson(jsonDecode(json));
-    } else {
-      throw CacheException(message: Validations.SOMETHING_WENT_WRONG);
-    }
-  }
-
-  // @override
-  Future<void> setCategoriesWithProducts(
-      CategoriesWithProductsModel response) async {
-    final json = jsonEncode(response.toJson());
-    await box.put(CacheKeys.categoryWithProduct, json);
-  }
-
-  // @override
-  Future<void> setBanners(BannerModel response) async {
-    final json = jsonEncode(response.toJson());
-    await box.put(CacheKeys.banners, json);
-  }
-
-  // @override
-  Future<void> setProduct(ProductModel response) async {
-    final json = jsonEncode(response.toJson());
-    await box.put(CacheKeys.product, json);
-  }
-
   @override
-  Future<bool> addProducts(List<ProductHiveModel> products) async {
+  Future<bool> addProducts(List<ProductModel> products) async {
     try {
       // return articles hive box
       final productsBox = Hive.box<ProductHiveModel>(CacheKeys.product);
       // clear all enrties from hive box
       final deleted = await productsBox.clear();
       // print deleted entries
-      print('delete $deleted entries from hive ${CacheKeys.product} box');
+      debugPrint('delete $deleted entries from hive ${CacheKeys.product} box');
       // convert ArticleModel to HiveType Article
       final converted = products
           .map((e) => ProductHiveModel(
@@ -88,7 +29,6 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
                 image: e.image,
                 jowiId: e.jowiId,
                 offAlways: e.offAlways,
-                orderNo: e.orderNo,
                 outPrice: e.outPrice,
                 rateId: e.rateId,
                 string: e.string,
@@ -134,6 +74,23 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
     return productsBox.values.map<ProductModel>((e) {
       return ProductModel(
         id: e.id,
+        active: e.active,
+        activeInMenu: e.activeInMenu,
+        brandId: e.brandId,
+        categories: e.categories,
+        currency: e.currency,
+        fromTime: e.fromTime,
+        hasModifier: e.hasModifier,
+        iikoId: e.iikoId,
+        image: e.image,
+        jowiId: e.jowiId,
+        offAlways: e.offAlways,
+        outPrice: e.outPrice,
+        rateId: e.rateId,
+        string: e.string,
+        title: e.title,
+        toTime: e.toTime,
+        type: e.type,
       );
     }).toList();
   }

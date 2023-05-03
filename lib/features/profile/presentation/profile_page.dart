@@ -53,9 +53,7 @@ class _ProfilePageState extends State<ProfilePage> with CacheMixin {
                   ],
                 ),
                 IconButton(
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   icon: SvgPicture.asset(AppIcons.edit),
                 )
               ],
@@ -88,30 +86,6 @@ class _ProfilePageState extends State<ProfilePage> with CacheMixin {
             isDivider: false,
           ),
           const Spacer(),
-          GestureDetector(
-            onTap: () {
-              localSource.setProfile(false);
-              Navigator.pushNamedAndRemoveUntil(
-                  context, RouteNames.main, (route) => false);
-            },
-            child: Container(
-              width: double.infinity,
-              margin: EdgeInsets.symmetric(horizontal: 10.0.w),
-              padding: EdgeInsets.symmetric(vertical: 15.0.h),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(10.0.r),
-              ),
-              child: Center(
-                child: Text(
-                  "Log out",
-                  style: AppTextsyles.w500
-                      .copyWith(color: AppColors.red, fontSize: 15),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 16.0.h),
           Text(
             "Version 1.0.0",
             style: AppTextsyles.w400

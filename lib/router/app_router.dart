@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
-
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/login/login_page.dart';
+import 'package:ploff_kebab/features/cart/presentation/blocs/cart_bloc.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/detail/product_detail_page.dart';
 import 'package:ploff_kebab/features/profile/presentation/settings/settings_page.dart';
 
@@ -65,6 +65,9 @@ class AppRoutes {
               BlocProvider<HomeBloc>(
                 create: (_) => sl<HomeBloc>(),
               ),
+              BlocProvider<CartBloc>(
+                create: (_) => sl<CartBloc>(),
+              ),
             ],
             child: const MainPage(),
           ),
@@ -72,7 +75,10 @@ class AppRoutes {
       case RouteNames.prouductDetail:
         ProductModel? args = settings.arguments as ProductModel?;
         return CupertinoPageRoute(
-          builder: (_) => ProductDeatilPage(product: args),
+          builder: (_) => BlocProvider(
+            create: (context) => MainBloc(),
+            child: ProductDeatilPage(product: args),
+          ),
         );
       case RouteNames.settings:
         return CupertinoPageRoute(

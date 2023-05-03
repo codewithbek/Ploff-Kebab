@@ -18,11 +18,11 @@ class _SettingsPageState extends State<SettingsPage> with CacheMixin {
       backgroundColor: AppColors.cF0F0F0,
       appBar: AppBar(
         centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
+        leading: IconButton(
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: Center(
+          icon: Center(
             child: SvgPicture.asset(
               AppIcons.arrowBack,
               width: 7.w,
@@ -65,24 +65,50 @@ class _SettingsPageState extends State<SettingsPage> with CacheMixin {
                   ),
                   const Divider(),
                   ListTile(
-                      leading: SvgPicture.asset(AppIcons.notification),
-                      title: Text(
-                        "Notification",
-                        style: AppTextsyles.w500.copyWith(fontSize: 18.sp),
-                      ),
-                      tileColor: AppColors.cF0F0F0,
-                      trailing: CupertinoSwitch(
-                        activeColor: AppColors.cFFCC00,
-                        value: isNotificationOn,
-                        onChanged: (value) {
-                          setState(() => {
-                                isNotificationOn = value,
-                              });
-                        },
-                      )),
+                    leading: SvgPicture.asset(AppIcons.notification),
+                    title: Text(
+                      "Notification",
+                      style: AppTextsyles.w500.copyWith(fontSize: 18.sp),
+                    ),
+                    tileColor: AppColors.cF0F0F0,
+                    trailing: CupertinoSwitch(
+                      activeColor: AppColors.cFFCC00,
+                      value: isNotificationOn,
+                      onChanged: (value) {
+                        setState(() => {
+                              isNotificationOn = value,
+                            });
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
+            AppUtils.kSpacer,
+            GestureDetector(
+              onTap: () {
+                localSource.setProfile(false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, RouteNames.main, (route) => false);
+              },
+              child: Container(
+                width: double.infinity,
+                margin: EdgeInsets.symmetric(horizontal: 10.0.w),
+                padding: EdgeInsets.symmetric(vertical: 15.0.h),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(10.0.r),
+                ),
+                child: Center(
+                  child: Text(
+                    "Log out",
+                    style: AppTextsyles.w500
+                        .copyWith(color: AppColors.red, fontSize: 15),
+                  ),
+                ),
+              ),
+            ),
+            AppUtils.kBoxHeight16
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:ploff_kebab/features/home/domain/entities/description_and_title_entity.dart';
 
 part 'product_hive_model.g.dart';
 
@@ -50,10 +51,10 @@ class ProductHiveModel extends HiveObject {
   final bool offAlways;
 
   @HiveField(15)
-  final String title;
+  final DescriptionAndTitleEntity title;
 
   @HiveField(16)
-  final String description;
+  final DescriptionAndTitleEntity description;
 
   @HiveField(17)
   final bool active;
@@ -64,9 +65,11 @@ class ProductHiveModel extends HiveObject {
   @HiveField(19)
   final String jowiId;
 
+  @HiveField(20)
+  
   ProductHiveModel({
     required this.id,
-    required this.orderNo,
+    this.orderNo = "",
     required this.active,
     required this.categories,
     required this.outPrice,

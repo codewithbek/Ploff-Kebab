@@ -57,6 +57,12 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
           ),
         );
         event.onSucces();
+        setUserInfo(
+          name: response.name ?? "",
+          phone: response.phone ?? "",
+          accessToken: response.accessToken ?? "",
+          refreshToken: response.refreshToken ?? "",
+        );
         localSource.setProfile(true);
       },
     );

@@ -1,8 +1,8 @@
 import 'package:pinput/pinput.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
-import 'package:ploff_kebab/core/utils/custom_sncakbar.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ConfirmCodePage extends StatefulWidget {

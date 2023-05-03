@@ -43,6 +43,14 @@ class LocalSource {
     return box.get(AppKeys.ACCESS_TOKEN);
   }
 
+  void setRefreshToken(String refreshToken) {
+    box.put(AppKeys.REFRESH_TOKEN, refreshToken);
+  }
+
+  String? getRefreshToken() {
+    return box.get(AppKeys.REFRESH_TOKEN);
+  }
+
   void setName(String firstName) {
     box.put(AppKeys.NAME, firstName);
   }

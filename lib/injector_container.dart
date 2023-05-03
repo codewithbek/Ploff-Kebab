@@ -8,9 +8,10 @@ import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart'
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
-import 'package:ploff_kebab/features/home/domain/usecases/search_product.dart';
+import 'package:ploff_kebab/features/cart/presentation/blocs/cart_bloc.dart';
 
 import 'features/auth/data/data_source/remote/auth_remote_data_source.dart';
+import 'features/home/data/datasources/local/home_local_data_source.dart';
 
 final sl = GetIt.instance;
 late Box<dynamic> box;
@@ -51,10 +52,12 @@ Future<void> init() async {
 
   mainFeature();
   homeFeature();
+  cartFeature();
   authFeature();
 }
 
 void mainFeature() {
+  // Bloc
   sl.registerFactory(() => MainBloc());
 }
 
@@ -64,9 +67,10 @@ void homeFeature() {
     () => HomeBloc(
       getBanner: sl(),
       getCategoriesWithProductsUseCase: sl(),
-      searchProduct: sl(),
+      homeLocalDataSource: sl(),
     ),
   );
+
   // sl.registerLazySingleton(() => SearchBloc(getLoungesUseCase: sl()));
 
   ///Usecases
@@ -77,14 +81,6 @@ void homeFeature() {
   sl.registerLazySingleton<GetCategoriesWithProductsUseCase>(
     () => GetCategoriesWithProductsUseCase(repository: sl()),
   );
-  sl.registerLazySingleton<SearchProductUseCase>(
-    () => SearchProductUseCase(repository: sl()),
-  );
-
-  // //searching usecases
-  // sl.registerLazySingleton<GetLoungesUseCase>(() => GetLoungesUseCase(
-  //       repository: sl(),
-  //     ));
 
   ///Repositories
   sl.registerLazySingleton<HomeRepository>(
@@ -98,9 +94,17 @@ void homeFeature() {
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(dio: sl()),
   );
-  // sl.registerLazySingleton<HomeLocalDataSource>(
-  //   () => HomeLocalDataSourceImpl(box: box),
-  // );
+  sl.registerLazySingleton<HomeLocalDataSource>(
+    () => HomeLocalDataSourceImpl(box: box),
+  );
+}
+
+//-----------------------------------------
+void cartFeature() {
+  // Bloc
+  sl.registerFactory(
+    () => CartBloc(),
+  );
 }
 
 //-----------------------------------------

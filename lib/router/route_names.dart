@@ -26,13 +26,12 @@ class RouteNames {
 
   /// home pages
   static const prouductDetail = '/prouduct_detail';
-  static const bookingLoungeDetail = '/booking_lounge_detail';
   static const pay = '/pay';
   static const location = '/location';
   static const searchByCountry = '/search_by_country';
 
-  ///My purchases
-  static const purchasedRestaurantDetail = '/purchased_restaurant_detail';
+  /// Cart
+  static const cart = '/cart';
 
   ///pin code
   static const pinCode = '/pin_code';

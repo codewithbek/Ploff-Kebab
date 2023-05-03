@@ -33,8 +33,8 @@ class ProductAdapter extends TypeAdapter<ProductHiveModel> {
       fromTime: fields[12] as String,
       toTime: fields[13] as String,
       offAlways: fields[14] as bool,
-      title: fields[15] as String,
-      description: fields[16] as String,
+      title: fields[15] as DescriptionAndTitleEntity,
+      description: fields[16] as DescriptionAndTitleEntity,
       iikoId: fields[18] as String,
       jowiId: fields[19] as String,
     );
