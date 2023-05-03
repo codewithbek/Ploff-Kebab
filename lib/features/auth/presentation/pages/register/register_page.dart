@@ -51,20 +51,25 @@ class _RegisterPageState extends State<RegisterPage> with CacheMixin {
           AppUtils.kGap6,
           Padding(
             padding: AppUtils.kPaddingHorizontal16,
-            child: CustomTextField(
-              controller: nameController,
-              onChanged: (value) {},
-              textInputType: TextInputType.name,
-              hintText: "Please enter your name",
-              hintTextStyle:
-                  TextStyle(color: AppColors.black2, fontSize: 15.sp),
-              fillColor: AppColors.cF0F0F0,
-              focusedBorder: OutlineInputBorder(
+            child: Form(
+              child: CustomTextField(
+                controller: nameController,
+                onChanged: (value) {},
+                textInputType: TextInputType.name,
+                hintText: "Please enter your name",
+                hintTextStyle:
+                    TextStyle(color: AppColors.black2, fontSize: 15.sp),
+                fillColor: AppColors.cF0F0F0,
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: AppColors.red)),
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: AppColors.cFFCC00)),
+                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(16),
-                  borderSide: const BorderSide(color: AppColors.cFFCC00)),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: const BorderSide(color: AppColors.cFFCC00),
+                  borderSide: const BorderSide(color: AppColors.cFFCC00),
+                ),
               ),
             ),
           ),
@@ -89,6 +94,9 @@ class _RegisterPageState extends State<RegisterPage> with CacheMixin {
                           RouteNames.confirmCode,
                           arguments: ConfirmStatus.register,
                         );
+                      } else {
+                        AppUtils.showSnackBar(
+                            context, "Ism kiritishda xatolik");
                       }
                     }),
               );

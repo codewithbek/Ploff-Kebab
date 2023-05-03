@@ -114,7 +114,8 @@ class AppUtils {
 
   static void showSnackBar(BuildContext context, String text) {
     final snackBar = SnackBar(
-      content: Text(text, style: const TextStyle(fontSize: 24)),
+      backgroundColor: Colors.red,
+      content: Text(text, style: TextStyle(fontSize: 18.sp)),
     );
 
     ScaffoldMessenger.of(context)

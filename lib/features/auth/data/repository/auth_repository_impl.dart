@@ -103,7 +103,7 @@ class AuthRepositoryImpl extends AuthRepository {
     ConfirmRequestEntity requestEntity,
     ConfirmStatus status,
   ) async {
-    debugPrint('confirmLogin ishga tushdi >>>>>>>> ');
+    debugPrint('confirmCode ishga tushdi >>>>>>>> ');
 
     final confirmLoginModel = ConfirmRequestModel(
       fcmToken: requestEntity.fcmToken,

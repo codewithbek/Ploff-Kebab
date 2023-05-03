@@ -4,15 +4,15 @@ import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_reques
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_response_etity.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 
-class ConfirmLoginUseCase
-    extends UseCase<ConfirmResponseEntity, ConfirmLoginParams> {
+class ConfirmCodeUseCase
+    extends UseCase<ConfirmResponseEntity, ConfirmCodeParams> {
   final AuthRepository authRepository;
 
-  ConfirmLoginUseCase(this.authRepository);
+  ConfirmCodeUseCase(this.authRepository);
 
   @override
   Future<Either<Failure, ConfirmResponseEntity>> call(
-      ConfirmLoginParams params) async {
+      ConfirmCodeParams params) async {
     final response = await authRepository.confirmCode(
       params.confirmLoginRequestEntity,
       params.status,
@@ -21,11 +21,11 @@ class ConfirmLoginUseCase
   }
 }
 
-class ConfirmLoginParams extends Equatable {
+class ConfirmCodeParams extends Equatable {
   final ConfirmRequestEntity confirmLoginRequestEntity;
   final ConfirmStatus status;
 
-  const ConfirmLoginParams(
+  const ConfirmCodeParams(
     this.confirmLoginRequestEntity,
     this.status,
   );

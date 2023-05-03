@@ -20,7 +20,6 @@ class _LoginPageState extends State<LoginPage> with LoginMixin, CacheMixin {
     super.initState();
   }
 
-  String errorText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +83,9 @@ class _LoginPageState extends State<LoginPage> with LoginMixin, CacheMixin {
                 prefixTextStyle:
                     TextStyle(color: AppColors.black1, fontSize: 15.sp),
                 fillColor: AppColors.white,
+                errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: const BorderSide(color: AppColors.red)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
                     borderSide: const BorderSide(color: AppColors.cFFCC00)),
@@ -126,6 +128,8 @@ class _LoginPageState extends State<LoginPage> with LoginMixin, CacheMixin {
                                 },
                               ),
                             );
+                      } else {
+                        AppUtils.showSnackBar(context, "Kirishda xatolik");
                       }
                     },
                   ),

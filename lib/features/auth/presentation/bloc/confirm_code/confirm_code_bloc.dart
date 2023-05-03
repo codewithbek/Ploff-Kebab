@@ -1,24 +1,23 @@
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_request_entity.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/confirm_login_usecase.dart';
+import 'package:ploff_kebab/features/auth/domain/usecases/confirm_code_usecase.dart';
 
 part 'confirm_code_event.dart';
 part 'confirm_code_state.dart';
 
 class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     with CacheMixin {
-  final ConfirmLoginUseCase confirmCode;
+  final ConfirmCodeUseCase confirmCode;
   ConfirmCodeBloc({
     required this.confirmCode,
   }) : super(const ConfirmCodeState(
           status: FormzSubmissionStatus.initial,
         )) {
-    on<PinCodeEvent>(_loginConfirmCode);
+    on<PinCodeEvent>(_confirmCode);
   }
 
-  void _loginConfirmCode(
-      PinCodeEvent event, Emitter<ConfirmCodeState> emit) async {
+  void _confirmCode(PinCodeEvent event, Emitter<ConfirmCodeState> emit) async {
     emit(const ConfirmCodeState(
       status: FormzSubmissionStatus.inProgress,
     ));
@@ -27,27 +26,37 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
       fcmToken: "",
       code: event.code,
     );
-    final response = await confirmCode(ConfirmLoginParams(
+    final response = await confirmCode(ConfirmCodeParams(
       request,
       event.status,
     ));
     response.fold(
-      (l) {
+      (error) {
+        debugPrint(">>>>$error");
+        debugPrint("Error");
+        // if (error is ServerFailure) {
+        //   if (error.message == "NOT_FOUND") {
+        //     event.onError();
+        //   }
+        // }
         emit(
           ConfirmCodeState(
             status: FormzSubmissionStatus.failure,
-            message: (l is ServerFailure)
-                ? l.message
-                : Validations.SOMETHING_WENT_WRONG,
+            message: (error is ServerFailure)
+                ? error.message
+                : Validations.INTERNET_FAILURE,
           ),
         );
+        event.onError();
       },
-      (r) {
+      (response) {
+        debugPrint("response");
         emit(
           const ConfirmCodeState(
             status: FormzSubmissionStatus.success,
           ),
         );
+        event.onSucces();
         localSource.setProfile(true);
       },
     );

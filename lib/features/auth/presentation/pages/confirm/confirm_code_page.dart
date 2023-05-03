@@ -1,7 +1,9 @@
 import 'package:pinput/pinput.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
+import 'package:ploff_kebab/core/utils/custom_sncakbar.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ConfirmCodePage extends StatefulWidget {
   const ConfirmCodePage({Key? key, required this.status}) : super(key: key);
@@ -160,16 +162,31 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
                 child: PrimaryButtonWidget(
                   text: "Continue",
                   onTap: () async {
-                    if (putController.text == "888888") {
+                    if (putController.text == "888888" &&
+                        putController.text.isNotEmpty) {
                       context.read<ConfirmCodeBloc>().add(
                             PinCodeEvent(
                               code: putController.text,
                               phone: localSource.getPhone().toString(),
                               status: widget.status,
+                              onError: () {
+                                showTopSnackBar(
+                                  Overlay.of(context),
+                                  const CustomSnackBar.error(
+                                    backgroundColor: AppColors.red,
+                                    message:
+                                        "Xatolik yuz berdi qaytadan urinib ko'ring",
+                                  ),
+                                );
+                              },
+                              onSucces: () {
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context, RouteNames.main, (route) => false);
+                              },
                             ),
                           );
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, RouteNames.main, (route) => false);
+                    } else {
+                      AppUtils.showSnackBar(context, "Kod kiritishda xatolik");
                     }
                   },
                 ),
