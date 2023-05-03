@@ -40,6 +40,9 @@ dependencies:
   dartz: ^0.10.1
   # hive
   hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  hive_generator: ^2.0.0
+
   # internet checker
   connectivity_plus: ^3.0.4
   internet_connection_checker: ^1.0.0+1

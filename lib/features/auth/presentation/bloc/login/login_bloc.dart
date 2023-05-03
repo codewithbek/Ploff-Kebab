@@ -1,3 +1,4 @@
+import 'package:ploff_kebab/core/error/exceptions.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/phone/phone_request_entity.dart';
@@ -32,22 +33,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
     final response = await sendPhone(SendPhoneParams(request));
     response.fold(
       (error) {
-        emit(
-          LoginState(
-            status: FormzSubmissionStatus.failure,
-            onError: event.onError,
-            message: (error is ServerFailure)
-                ? error.message
-                : Validations.INTERNET_FAILURE,
-          ),
-        );
+        if (error is ServerFailure) {
+          if (error.message == "NOT_FOUND") {
+            print("event.onError");
+            event.onError();
+          }
+        }
       },
       (response) {
         emit(LoginState(
           status: FormzSubmissionStatus.success,
-          onSucces: event.onSucces,
         ));
-        event.onSucces;
+        event.onSucces();
       },
     );
     setUserPhoneNumber(phone: event.phone);
@@ -62,6 +59,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
     final response = await login(LoginParams(request));
     response.fold(
       (error) {
+        debugPrint(">>>>$error");
+        debugPrint("Error");
         emit(
           LoginState(
             status: FormzSubmissionStatus.failure,
@@ -72,6 +71,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> with CacheMixin {
         );
       },
       (response) {
+        debugPrint(">>>>$response");
+        debugPrint("response");
+
         emit(
           const LoginState(
             status: FormzSubmissionStatus.success,

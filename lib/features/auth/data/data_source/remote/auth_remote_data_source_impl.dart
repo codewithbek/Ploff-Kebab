@@ -68,44 +68,29 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return PhoneResponseModel.fromJson(response.data);
       } else {
-        throw ServerException.fromJson(response.data);
+        print(">>>1");
+        throw ServerException.fromJson(response.data["Error"]);
       }
     } on DioError catch (e) {
-      throw ServerException.fromJson(e.response?.data);
+      print(">>>2");
+
+      throw ServerException.fromJson(e.response?.data["Error"]);
     } on FormatException {
+      print(">>>3");
+
       throw ServerException(message: Validations.SOMETHING_WENT_WRONG);
     }
   }
 
   @override
-  Future<ConfirmResponseModel> confirmLogin(
-      ConfirmRequestModel confirmRequestModel) async {
+  Future<ConfirmResponseModel> confirmCode(
+      ConfirmRequestModel confirmRequestModel, ConfirmStatus status) async {
+    var myStatus = status == ConfirmStatus.login
+        ? Urls.LOGIN_CONFIRM
+        : Urls.REGISTER_CONFIRM;
     try {
       final response = await dio.post(
-        Constants.baseUrl + Urls.LOGIN_CONFIRM,
-        data: jsonEncode(
-          confirmRequestModel.toJson(),
-        ),
-        options: requestOptions,
-      );
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        return ConfirmResponseModel.fromJson(response.data);
-      } else {
-        throw ServerException.fromJson(response.data);
-      }
-    } on DioError catch (e) {
-      throw ServerException.fromJson(e.response?.data);
-    } on FormatException {
-      throw ServerException(message: Validations.SOMETHING_WENT_WRONG);
-    }
-  }
-
-  @override
-  Future<ConfirmResponseModel> confirmRegister(
-      ConfirmRequestModel confirmRequestModel) async {
-    try {
-      final response = await dio.post(
-        Constants.baseUrl + Urls.REGISTER_CONFIRM,
+        Constants.baseUrl + myStatus,
         data: jsonEncode(
           confirmRequestModel.toJson(),
         ),

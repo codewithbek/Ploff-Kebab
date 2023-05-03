@@ -2,41 +2,39 @@ import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_request_entity.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/confirm_login_usecase.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/confirm_register_usecase.dart';
 
 part 'confirm_code_event.dart';
 part 'confirm_code_state.dart';
 
 class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
     with CacheMixin {
-  final ConfirmLoginUseCase confirmLogin;
-  final ConfirmRegisterUseCase confirmRegister;
+  final ConfirmLoginUseCase confirmCode;
   ConfirmCodeBloc({
-    required this.confirmLogin,
-    required this.confirmRegister,
+    required this.confirmCode,
   }) : super(const ConfirmCodeState(
           status: FormzSubmissionStatus.initial,
         )) {
-    on<LoginConfirmCodeEvent>(_loginConfirmCode);
-    on<RegisterConfirmCodeEvent>(_registerConfirmCode);
+    on<PinCodeEvent>(_loginConfirmCode);
   }
 
   void _loginConfirmCode(
-      LoginConfirmCodeEvent event, Emitter<ConfirmCodeState> emit) async {
+      PinCodeEvent event, Emitter<ConfirmCodeState> emit) async {
     emit(const ConfirmCodeState(
       status: FormzSubmissionStatus.inProgress,
     ));
     final request = ConfirmRequestEntity(
-      phone: localSource.getPhone(),
+      phone: event.phone,
       fcmToken: "",
       code: event.code,
     );
-    final response = await confirmLogin(ConfirmLoginParams(request));
+    final response = await confirmCode(ConfirmLoginParams(
+      request,
+      event.status,
+    ));
     response.fold(
       (l) {
         emit(
           ConfirmCodeState(
-            userStatus: ConfirmStatus.unauthenticated,
             status: FormzSubmissionStatus.failure,
             message: (l is ServerFailure)
                 ? l.message
@@ -48,44 +46,9 @@ class ConfirmCodeBloc extends Bloc<ConfirmCodeEvent, ConfirmCodeState>
         emit(
           const ConfirmCodeState(
             status: FormzSubmissionStatus.success,
-            userStatus: ConfirmStatus.authenticated,
           ),
         );
         localSource.setProfile(true);
-      },
-    );
-  }
-
-  void _registerConfirmCode(
-      RegisterConfirmCodeEvent event, Emitter<ConfirmCodeState> emit) async {
-    emit(const ConfirmCodeState(
-        status: FormzSubmissionStatus.inProgress,
-        userStatus: ConfirmStatus.unauthenticated));
-    final request = ConfirmRequestEntity(
-      phone: localSource.getPhone(),
-      fcmToken: "",
-      code: event.code,
-    );
-    final response = await confirmRegister(
-        ConfirmRegisterParams(confirmRegisterRequestEntity: request));
-    response.fold(
-      (l) {
-        emit(
-          ConfirmCodeState(
-            status: FormzSubmissionStatus.failure,
-            message: (l is ServerFailure)
-                ? l.message
-                : Validations.SOMETHING_WENT_WRONG,
-          ),
-        );
-        localSource.setProfile(true);
-      },
-      (r) {
-        emit(
-          const ConfirmCodeState(
-            status: FormzSubmissionStatus.success,
-          ),
-        );
       },
     );
   }

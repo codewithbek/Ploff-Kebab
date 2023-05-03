@@ -15,8 +15,6 @@ class PloffApp extends StatelessWidget {
           theme: ThemeData(
               appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
-            systemOverlayStyle:
-                SystemUiOverlayStyle(statusBarColor: AppColors.white),
             elevation: 0,
           )),
           navigatorKey: rootNavigatorKey,

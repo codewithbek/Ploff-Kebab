@@ -1,30 +1,28 @@
 part of 'confirm_code_bloc.dart';
 
+enum ConfirmStatus {
+  login,
+  register,
+}
+
 abstract class ConfirmCodeEvent extends Equatable {
   const ConfirmCodeEvent();
 }
 
-class LoginConfirmCodeEvent extends ConfirmCodeEvent {
+class PinCodeEvent extends ConfirmCodeEvent {
   final String code;
   final String phone;
-  const LoginConfirmCodeEvent({
-    required this.code,
-    required this.phone,
-  });
-  @override
-  List<Object?> get props => [code, phone];
-}
+  final ConfirmStatus status;
 
-class RegisterConfirmCodeEvent extends ConfirmCodeEvent {
-  final String code;
-  final String phone;
-  const RegisterConfirmCodeEvent({
+  const PinCodeEvent({
     required this.code,
     required this.phone,
+    required this.status,
   });
   @override
   List<Object?> get props => [
         code,
         phone,
+        status,
       ];
 }

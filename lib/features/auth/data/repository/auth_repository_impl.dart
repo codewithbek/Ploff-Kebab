@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ploff_kebab/core/error/exceptions.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/data/data_source/local/auth_local_data_source.dart';
 import 'package:ploff_kebab/features/auth/data/data_source/remote/auth_remote_data_source.dart';
@@ -13,6 +14,7 @@ import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_respon
 import 'package:ploff_kebab/features/auth/domain/entities/confirm/confirm_request_entity.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/phone/phone_response_entity.dart';
 import 'package:ploff_kebab/features/auth/domain/entities/phone/phone_request_entity.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 
 class AuthRepositoryImpl extends AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
@@ -86,6 +88,9 @@ class AuthRepositoryImpl extends AuthRepository {
         final response = await authRemoteDataSource.sendPhone(phoneModel);
         return Right(response.toEntity());
       } catch (e) {
+        if (e is ServerException) {
+          return Left(ServerFailure(message: (e).message));
+        }
         return Left(ServerFailure(message: e.toString()));
       }
     } else {
@@ -94,8 +99,10 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, ConfirmResponseEntity>> confirmLogin(
-      ConfirmRequestEntity requestEntity) async {
+  Future<Either<Failure, ConfirmResponseEntity>> confirmCode(
+    ConfirmRequestEntity requestEntity,
+    ConfirmStatus status,
+  ) async {
     debugPrint('confirmLogin ishga tushdi >>>>>>>> ');
 
     final confirmLoginModel = ConfirmRequestModel(
@@ -106,30 +113,7 @@ class AuthRepositoryImpl extends AuthRepository {
     if (await networkInfo.isConnected) {
       try {
         final response =
-            await authRemoteDataSource.confirmLogin(confirmLoginModel);
-        return Right(response.toEntity());
-      } catch (e) {
-        return Left(ServerFailure(message: e.toString()));
-      }
-    } else {
-      return Left(NoInternetFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, ConfirmResponseEntity>> confirmRegister(
-      ConfirmRequestEntity requestEntity) async {
-    debugPrint('confirmRegister ishga tushdi >>>>>>>> ');
-
-    final confirmRegisterModel = ConfirmRequestModel(
-      fcmToken: requestEntity.fcmToken,
-      phone: requestEntity.phone,
-      code: requestEntity.code,
-    );
-    if (await networkInfo.isConnected) {
-      try {
-        final response =
-            await authRemoteDataSource.confirmRegister(confirmRegisterModel);
+            await authRemoteDataSource.confirmCode(confirmLoginModel, status);
         return Right(response.toEntity());
       } catch (e) {
         return Left(ServerFailure(message: e.toString()));

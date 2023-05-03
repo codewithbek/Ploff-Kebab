@@ -1,11 +1,8 @@
-import 'package:ploff_kebab/core/inputs/phone_input.dart';
 import 'package:ploff_kebab/core/inputs/name_input.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
 import 'package:ploff_kebab/core/mixins/register_validation.dart';
 import 'package:ploff_kebab/export_files.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/confirm_register_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
-import '../../../domain/usecases/register_usecase.dart';
 
 part 'register_event.dart';
 

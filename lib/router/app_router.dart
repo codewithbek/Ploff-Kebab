@@ -46,10 +46,13 @@ class AppRoutes {
         );
 
       case RouteNames.confirmCode:
+        ConfirmStatus status = settings.arguments as ConfirmStatus;
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => sl<ConfirmCodeBloc>(),
-            child: const ConfirmCodePage(),
+            child: ConfirmCodePage(
+              status: status,
+            ),
           ),
         );
       case RouteNames.main:

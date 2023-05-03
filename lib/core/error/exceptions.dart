@@ -4,7 +4,7 @@ class ServerException implements Exception {
   ServerException({required this.message});
 
   factory ServerException.fromJson(Map<String, dynamic> json) {
-    return ServerException(message: json['detail']);
+    return ServerException(message: json['code']);
   }
 }
 

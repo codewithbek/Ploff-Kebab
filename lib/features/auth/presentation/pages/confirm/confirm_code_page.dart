@@ -4,7 +4,8 @@ import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 
 class ConfirmCodePage extends StatefulWidget {
-  const ConfirmCodePage({Key? key}) : super(key: key);
+  const ConfirmCodePage({Key? key, required this.status}) : super(key: key);
+  final ConfirmStatus status;
 
   @override
   State<ConfirmCodePage> createState() => _ConfirmCodePageState();
@@ -62,12 +63,12 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
             padding: AppUtils.kPaddingHorizontal16,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "Enter 6-digit code from SMS",
                   style: TextStyle(color: Color(0xff92979B)),
                 ),
-                Text("+380 787 78 87"),
+                Text(localSource.getPhone().toString()),
               ],
             ),
           ),
@@ -77,7 +78,6 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
             padding: AppUtils.kPaddingHorizontal16,
             child: Text(
               "Code",
-              // "Номер телефона ${state is CountryPhoneNumberState ? DateTime.now().difference(state.time!).inMilliseconds : ""}",
               style: AppTextsyles.w500,
             ),
           ),
@@ -114,11 +114,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
                 ),
               ],
               pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
-              onChanged: (value) {
-                // context
-                //     .read<ConfirmOtpBloc>()
-                //     .add(PinPutCodeChangedEvent(value));
-              },
+              onChanged: (value) {},
               disabledPinTheme: defaultPinTheme.copyWith(
                 textStyle: defaultPinTheme.textStyle!.copyWith(
                   color: Colors.black,
@@ -162,23 +158,21 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
               return SafeArea(
                 minimum: AppUtils.kPaddingAll16,
                 child: PrimaryButtonWidget(
-                    text: "Continue",
-                    onTap: () async {
-                      if (state.userStatus == ConfirmStatus.authenticated) {
-                        context.read<ConfirmCodeBloc>().add(
-                            LoginConfirmCodeEvent(
-                                code: putController.text,
-                                phone: localSource.getPhone().toString()));
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, RouteNames.main, (route) => false);
-                      }
+                  text: "Continue",
+                  onTap: () async {
+                    if (putController.text == "888888") {
                       context.read<ConfirmCodeBloc>().add(
-                          RegisterConfirmCodeEvent(
+                            PinCodeEvent(
                               code: putController.text,
-                              phone: localSource.getPhone().toString()));
+                              phone: localSource.getPhone().toString(),
+                              status: widget.status,
+                            ),
+                          );
                       Navigator.pushNamedAndRemoveUntil(
                           context, RouteNames.main, (route) => false);
-                    }),
+                    }
+                  },
+                ),
               );
             },
           ),

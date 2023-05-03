@@ -3,6 +3,7 @@ import 'package:ploff_kebab/core/mixins/login_mixin.dart';
 import 'package:ploff_kebab/core/widgets/custom_text_field.dart';
 import 'package:ploff_kebab/core/widgets/masked_text_input_formatter.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 
 class LoginPage extends StatefulWidget {
@@ -104,17 +105,27 @@ class _LoginPageState extends State<LoginPage> with LoginMixin, CacheMixin {
                         var phone = phoneNumberController.text
                             .trim()
                             .replaceAll(' ', '');
-                        context.read<LoginBloc>().add(LoginSendPhoneNumberEvent(
-                            phone: "+998$phone",
-                            onError: () {},
-                            onSucces: () {}));
-                        if (state.status == FormzSubmissionStatus.success) {
-                          context.read<LoginBloc>().add(UserLoginEvent(
-                              phone: localSource.getPhone().toString(),
-                              tag: "tag"));
-                          Navigator.pushNamed(context, RouteNames.confirmCode);
-                        }
-                        Navigator.pushNamed(context, RouteNames.register);
+                        context.read<LoginBloc>().add(
+                              LoginSendPhoneNumberEvent(
+                                phone: "+998$phone",
+                                onError: () {
+                                  Navigator.pushNamed(
+                                      context, RouteNames.register);
+                                },
+                                onSucces: () {
+                                  context.read<LoginBloc>().add(
+                                        UserLoginEvent(
+                                            phone: localSource
+                                                .getPhone()
+                                                .toString(),
+                                            tag: "tag"),
+                                      );
+                                  Navigator.pushNamed(
+                                      context, RouteNames.confirmCode,
+                                      arguments: ConfirmStatus.login);
+                                },
+                              ),
+                            );
                       }
                     },
                   ),

@@ -6,6 +6,7 @@ import 'package:ploff_kebab/features/auth/data/models/login/login_request_model.
 import 'package:ploff_kebab/features/auth/data/models/phone/phone_request_model.dart';
 import 'package:ploff_kebab/features/auth/data/models/phone/phone_response_model.dart';
 import 'package:ploff_kebab/features/auth/data/models/register/register_request_model.dart';
+import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import '../../models/auth_response_model.dart';
 import 'dart:convert';
 
@@ -21,9 +22,10 @@ abstract class AuthRemoteDataSource {
 
   Future<PhoneResponseModel> sendPhone(PhoneRequestModel phoneRequestModel);
 
-  Future<ConfirmResponseModel> confirmRegister(
-      ConfirmRequestModel confirmRequestModel);
+  
 
-  Future<ConfirmResponseModel> confirmLogin(
-      ConfirmRequestModel confirmRequestModel);
+  Future<ConfirmResponseModel> confirmCode(
+    ConfirmRequestModel confirmRequestModel,
+    ConfirmStatus status,
+  );
 }

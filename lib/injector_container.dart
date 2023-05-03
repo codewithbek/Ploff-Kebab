@@ -2,7 +2,6 @@ import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/data/data_source/local/auth_local_data_source.dart';
 import 'package:ploff_kebab/features/auth/data/repository/auth_repository_impl.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/confirm_login_usecase.dart';
-import 'package:ploff_kebab/features/auth/domain/usecases/confirm_register_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/send_phone_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/login_usecase.dart';
 import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart';
@@ -112,16 +111,15 @@ void authFeature() {
     () => LoginBloc(login: sl(), sendPhone: sl()),
   );
   sl.registerFactory(() => RegisterBloc(signUp: sl()));
-  sl.registerFactory(
-      () => ConfirmCodeBloc(confirmLogin: sl(), confirmRegister: sl()));
+  sl.registerFactory(() => ConfirmCodeBloc(
+        confirmCode: sl(),
+      ));
 
   ///Usecases
   sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
   sl.registerLazySingleton<RegisterUseCase>(() => RegisterUseCase(sl()));
   sl.registerLazySingleton<ConfirmLoginUseCase>(
       () => ConfirmLoginUseCase(sl()));
-  sl.registerLazySingleton<ConfirmRegisterUseCase>(
-      () => ConfirmRegisterUseCase(sl()));
   sl.registerLazySingleton<SendPhoneUseCase>(() => SendPhoneUseCase(sl()));
 
   ///Repositories

@@ -17,4 +17,3 @@ class ConfirmCodeState extends Equatable {
       ];
 }
 
-enum ConfirmStatus { uninitialized, authenticated, unauthenticated }
