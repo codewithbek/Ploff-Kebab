@@ -1,6 +1,6 @@
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/home/data/datasources/local/home_local_data_source.dart';
-import 'package:ploff_kebab/features/home/domain/entities/product_entity/product_entity.dart';
+import 'package:ploff_kebab/features/home/data/models/hive_model/product_hive_model.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -8,11 +8,9 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetCategoriesWithProductsUseCase getCategoriesWithProductsUseCase;
   final GetBannerUseCase getBanner;
-  final HomeLocalDataSource homeLocalDataSource;
   HomeBloc({
     required this.getCategoriesWithProductsUseCase,
     required this.getBanner,
-    required this.homeLocalDataSource,
   }) : super(const HomeState()) {
     on<GetCategoriesWithProductsEvent>(_getCategoriesWithProducts);
     on<GetBannerEvent>(_getBanner);
@@ -51,13 +49,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _addProduct(AddProductEvent event, Emitter<HomeState> emit) async {
-    var response = await homeLocalDataSource.addProducts(event.product);
-    emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-    if (response == true) {
-      emit(state.copyWith(
-          isProductAdded: response, status: FormzSubmissionStatus.success));
-    } else {
-      emit(state.copyWith(status: FormzSubmissionStatus.failure));
-    }
+    // var response = await homeLocalDataSource.addProducts(event.product);
+    // emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    // if (response == true) {
+    //   emit(state.copyWith(
+    //       isProductAdded: response, status: FormzSubmissionStatus.success));
+    // } else {
+    //   emit(state.copyWith(
+    //       status: FormzSubmissionStatus.failure, isProductAdded: response));
+    // }
   }
 }

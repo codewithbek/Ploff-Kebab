@@ -3,8 +3,8 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ProductDeatilPage extends StatefulWidget {
-  const ProductDeatilPage({super.key, this.product});
-  final ProductModel? product;
+  const ProductDeatilPage({super.key, required this.product});
+  final ProductModel product;
 
   @override
   State<ProductDeatilPage> createState() => _ProductDeatilPageState();
@@ -78,11 +78,11 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          widget.product!.title.uz,
+                          widget.product.title.uz,
                           style: AppTextsyles.w500,
                         ),
                         Text(
-                          "Ba'tafsil: ${widget.product!.description.uz}",
+                          "Ba'tafsil: ${widget.product.description.uz}",
                           style: AppTextsyles.w400.copyWith(
                             fontSize: 15.0.sp,
                             color: AppColors.black1.withOpacity(.5),
@@ -131,9 +131,9 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                                       color: AppColors.cFFCC00,
                                     )
                                   : const Icon(Icons.radio_button_off),
-                              title: Text(widget.product!.type),
+                              title: Text(widget.product.type),
                               trailing:
-                                  Text(widget.product!.outPrice.toString()),
+                                  Text(widget.product.outPrice.toString()),
                               onTap: () {
                                 setState(() {
                                   modifierindex = index;
@@ -177,7 +177,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                           onTap: () {
                             setState(() {
                               if (count > 1) count--;
-                              price = count * widget.product!.outPrice;
+                              price = count * widget.product.outPrice;
                             });
                           },
                         ),
@@ -191,7 +191,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                           onTap: () {
                             setState(() {
                               count++;
-                              price = count * widget.product!.outPrice;
+                              price = count * widget.product.outPrice;
                             });
                           },
                           imagePath: AppIcons.plus,
@@ -213,17 +213,24 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                 ],
               ),
               SizedBox(height: 15.0.h),
-              PrimaryButtonWidget(
-                onTap: () {
-                  showTopSnackBar(
-                    Overlay.of(context),
-                    const CustomSnackBar.success(
-                      backgroundColor: AppColors.c22C348,
-                      message: 'Buyurtmangiz savatga qo\'shildi',
-                    ),
+              BlocBuilder<HomeBloc, HomeState>(
+                builder: (context, state) {
+                  return PrimaryButtonWidget(
+                    onTap: () {
+                      context
+                          .read<HomeBloc>()
+                          .add(AddProductEvent(product: widget.product));
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        const CustomSnackBar.success(
+                          backgroundColor: AppColors.c22C348,
+                          message: 'Buyurtmangiz savatga qo\'shildi',
+                        ),
+                      );
+                    },
+                    text: "Add",
                   );
                 },
-                text: "To Cart",
               ),
             ],
           ),

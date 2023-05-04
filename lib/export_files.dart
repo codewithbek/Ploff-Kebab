@@ -66,3 +66,6 @@ export 'package:ploff_kebab/features/auth/domain/entities/login/login_request_en
 export 'package:ploff_kebab/features/auth/domain/entities/register/register_request_entity.dart';
 export 'package:ploff_kebab/features/auth/domain/entities/auth_response_entity.dart';
 export 'package:ploff_kebab/features/auth/domain/repository/auth_repository.dart';
+export 'package:ploff_kebab/features/cart/presentation/blocs/cart_bloc.dart';
+export 'package:ploff_kebab/features/cart/presentation/pages/empty_page.dart';
+export 'package:ploff_kebab/features/cart/presentation/widgets/carts_item.dart';

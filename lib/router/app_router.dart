@@ -73,10 +73,10 @@ class AppRoutes {
           ),
         );
       case RouteNames.prouductDetail:
-        ProductModel? args = settings.arguments as ProductModel?;
+        ProductModel args = settings.arguments as ProductModel;
         return CupertinoPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => MainBloc(),
+            create: (context) => sl<HomeBloc>(),
             child: ProductDeatilPage(product: args),
           ),
         );
@@ -89,3 +89,6 @@ class AppRoutes {
     return null;
   }
 }
+
+
+

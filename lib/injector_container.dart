@@ -15,6 +15,7 @@ import 'features/home/data/datasources/local/home_local_data_source.dart';
 
 final sl = GetIt.instance;
 late Box<dynamic> box;
+late Box<dynamic> productBox;
 
 Future<void> init() async {
   //External
@@ -67,7 +68,6 @@ void homeFeature() {
     () => HomeBloc(
       getBanner: sl(),
       getCategoriesWithProductsUseCase: sl(),
-      homeLocalDataSource: sl(),
     ),
   );
 
@@ -95,7 +95,7 @@ void homeFeature() {
     () => HomeRemoteDataSourceImpl(dio: sl()),
   );
   sl.registerLazySingleton<HomeLocalDataSource>(
-    () => HomeLocalDataSourceImpl(box: box),
+    () => HomeLocalDataSourceImpl(box: productBox),
   );
 }
 
@@ -103,7 +103,7 @@ void homeFeature() {
 void cartFeature() {
   // Bloc
   sl.registerFactory(
-    () => CartBloc(),
+    () => CartBloc(homeLocalDataSource: sl()),
   );
 }
 
@@ -155,4 +155,5 @@ Future<void> initHive() async {
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   box = await Hive.openBox<dynamic>(boxName);
+  productBox = await Hive.openBox<dynamic>(CacheKeys.product);
 }

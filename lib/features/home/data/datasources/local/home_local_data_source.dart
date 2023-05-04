@@ -6,7 +6,7 @@ part 'home_local_data_source_impl.dart';
 abstract class HomeLocalDataSource {
   Future<bool> initDb();
   Future<bool> deleteDb();
-  Future<bool> addProducts(List<ProductModel> products);
+  Future<bool> addProducts(ProductModel products);
   Future<bool> deleteAllProducts();
   Future<List<ProductModel>> getProducts();
 }

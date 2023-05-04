@@ -1,10 +1,25 @@
 part of 'cart_bloc.dart';
 
-abstract class CartState extends Equatable {
-  const CartState();
-}
+class CartState extends Equatable {
+  final FormzSubmissionStatus status;
+  final List<ProductModel> products;
 
-class CartInitial extends CartState {
+  const CartState({
+    this.status = FormzSubmissionStatus.initial,
+    this.products = const [],
+  });
+  CartState copyWith({
+    FormzSubmissionStatus? status,
+    List<ProductModel>? products,
+  }) =>
+      CartState(
+        status: status ?? this.status,
+        products: products ?? this.products,
+      );
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [
+        status,
+        products,
+      ];
 }

@@ -12,7 +12,7 @@ class GetCategoriesWithProductsEvent extends HomeEvent {}
 class GetBannerEvent extends HomeEvent {}
 
 class AddProductEvent extends HomeEvent {
-  final List<ProductModel> product;
+  final ProductModel product;
   const AddProductEvent({
     required this.product,
   });

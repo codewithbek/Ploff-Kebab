@@ -5,40 +5,22 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
 
   HomeLocalDataSourceImpl({required this.box});
   @override
-  Future<bool> addProducts(List<ProductModel> products) async {
+  Future<bool> addProducts(ProductModel products) async {
     try {
-      // return articles hive box
-      final productsBox = Hive.box<ProductHiveModel>(CacheKeys.product);
-      // clear all enrties from hive box
-      final deleted = await productsBox.clear();
-      // print deleted entries
-      debugPrint('delete $deleted entries from hive ${CacheKeys.product} box');
-      // convert ArticleModel to HiveType Article
-      final converted = products
-          .map((e) => ProductHiveModel(
-                id: e.id,
-                active: e.active,
-                activeInMenu: e.activeInMenu,
-                brandId: e.brandId,
-                categories: e.categories,
-                currency: e.currency,
-                description: e.description,
-                fromTime: e.fromTime,
-                hasModifier: e.hasModifier,
-                iikoId: e.iikoId,
-                image: e.image,
-                jowiId: e.jowiId,
-                offAlways: e.offAlways,
-                outPrice: e.outPrice,
-                rateId: e.rateId,
-                string: e.string,
-                title: e.title,
-                toTime: e.toTime,
-                type: e.type,
-              ))
-          .toList();
+      final converted = ProductHiveModel()
+        ..id = products.id
+        ..title = products.title
+        ..outPrice = products.outPrice
+        ..active = products.active
+        ..activeInMenu = products.activeInMenu
+        ..image = products.image
+        ..description = products.description
+        ..type = products.type
+        ..currency = products.currency
+        ..hasModifier = products.hasModifier;
+
       // insert all articles to hive box
-      final entries = await productsBox.addAll(converted);
+      final entries = await box.add(converted);
       debugPrint(entries.toString());
       return true;
     } on Exception catch (e) {
@@ -76,20 +58,10 @@ class HomeLocalDataSourceImpl implements HomeLocalDataSource {
         id: e.id,
         active: e.active,
         activeInMenu: e.activeInMenu,
-        brandId: e.brandId,
-        categories: e.categories,
         currency: e.currency,
-        fromTime: e.fromTime,
-        hasModifier: e.hasModifier,
-        iikoId: e.iikoId,
         image: e.image,
-        jowiId: e.jowiId,
-        offAlways: e.offAlways,
         outPrice: e.outPrice,
-        rateId: e.rateId,
-        string: e.string,
         title: e.title,
-        toTime: e.toTime,
         type: e.type,
       );
     }).toList();
