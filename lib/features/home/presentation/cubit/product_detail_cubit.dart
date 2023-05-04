@@ -39,4 +39,10 @@ class ProductDetailCubit extends Cubit<ProductDetailState> {
     emit(state.copyWith(status: FormzSubmissionStatus.success));
     getCachedProducts();
   }
+
+  void deleteCachedProductById(String id) async {
+    await _cachedProducts.deleteCachedProductById(id);
+    emit(state.copyWith(id: id, status: FormzSubmissionStatus.success));
+    getCachedProducts();
+  }
 }

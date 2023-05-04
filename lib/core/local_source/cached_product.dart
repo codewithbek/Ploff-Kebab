@@ -35,4 +35,8 @@ class CachedProducts {
     var box = await _hiveService.openbox();
     return _hiveService.deleteAllCachedProduct(box);
   }
+  Future<void> deleteCachedProductById(String id) async {
+    var box = await _hiveService.openbox();
+    return _hiveService.deleteCachedProductById(box, id);
+  }
 }

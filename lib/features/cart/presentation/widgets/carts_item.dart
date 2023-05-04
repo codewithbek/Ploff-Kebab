@@ -1,5 +1,8 @@
+import 'package:ploff_kebab/core/widgets/dialogs/delete_dialogs.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/home/data/models/hive_model/product_hive_model.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/product_detail_cubit.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class CartsItem extends StatefulWidget {
   const CartsItem({
@@ -61,7 +64,20 @@ class _CartsItemState extends State<CartsItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  SvgPicture.asset(AppIcons.cancel),
+                  ZoomTapAnimation(
+                      onTap: () {
+                        myCustomDialog(
+                            context: context,
+                            onTap: () {
+                              context
+                                  .read<ProductDetailCubit>()
+                                  .deleteCachedProductById(widget.aboutMeal.id);
+                              Navigator.pop(context);
+                            },
+                            asktext:
+                                "Are you sure?\n Do you want to remove a product from the list?");
+                      },
+                      child: SvgPicture.asset(AppIcons.cancel)),
                   SizedBox(height: 25.0.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

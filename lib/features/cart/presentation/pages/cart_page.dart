@@ -28,7 +28,7 @@ class _CartPageState extends State<CartPage> {
               actions: [
                 IconButton(
                   onPressed: () {
-                    deleteAllDialog(
+                    myCustomDialog(
                         context: context,
                         onTap: () {
                           context

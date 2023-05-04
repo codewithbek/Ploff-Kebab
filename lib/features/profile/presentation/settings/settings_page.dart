@@ -88,7 +88,7 @@ class _SettingsPageState extends State<SettingsPage> with CacheMixin {
             AppUtils.kSpacer,
             GestureDetector(
               onTap: () {
-                deleteAllDialog(
+                myCustomDialog(
                     context: context,
                     onTap: () {
                       localSource.setProfile(false);

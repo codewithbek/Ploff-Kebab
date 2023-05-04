@@ -21,4 +21,8 @@ class ProductHiveService {
   Future<void> deleteAllCachedProduct(Box box) async {
     await box.clear();
   }
+
+  Future<void> deleteCachedProductById(Box box, String id) async {
+    await box.delete(id);
+  }
 }

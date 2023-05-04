@@ -1,6 +1,6 @@
 import 'package:ploff_kebab/export_files.dart';
 
-Future<dynamic> deleteAllDialog(
+Future<dynamic> myCustomDialog(
     {required BuildContext context,
     required VoidCallback onTap,
     required String asktext}) {
@@ -26,6 +26,7 @@ Future<dynamic> deleteAllDialog(
               fontSize: 15.0.sp,
               color: AppColors.c858585,
             ),
+            textAlign: TextAlign.center,
           ),
           SizedBox(
             height: 16.h,
