@@ -77,7 +77,7 @@ class _CartsItemState extends State<CartsItem> {
                         child: Row(
                           children: [
                             IncDecButtons(
-                              marginH: 0,
+                              marginH: 6.w,
                               iconWiwth: 10.w,
                               imagePath: AppIcons.minus,
                               onTap: () {
@@ -85,12 +85,6 @@ class _CartsItemState extends State<CartsItem> {
                                       if (count > 1)
                                         {
                                           count--,
-                                          // context
-                                          //     .read<CountMealsCubit>()
-                                          //     .removeMeals(),
-                                          // context.read<BottomNavigationCubit>().sum -=
-                                          //     widget.aboutMeal.outPrice,
-                                          // log(widget.aboutMeal.outPrice.toString()),
                                         }
                                     });
                               },
@@ -102,12 +96,11 @@ class _CartsItemState extends State<CartsItem> {
                               ),
                             ),
                             IncDecButtons(
-                              marginH: 0,
+                              marginH: 6.w,
                               iconWiwth: 10.w,
                               onTap: () {
                                 setState(() {
                                   count++;
-                                  // price = count * widget.product.outPrice;
                                 });
                               },
                               imagePath: AppIcons.plus,

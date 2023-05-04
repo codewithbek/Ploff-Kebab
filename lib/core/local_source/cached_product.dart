@@ -10,6 +10,7 @@ class CachedProducts {
 
   Future<void> addProduct({required ProductModel productModel}) async {
     var box = await _hiveService.openbox();
+
     await _hiveService.addProduct(
         box,
         ProductHiveModel()
@@ -29,7 +30,8 @@ class CachedProducts {
     var box = await _hiveService.openbox();
     return _hiveService.getCachedProducts(box);
   }
-   Future<void> deleteAllCachedProduct() async {
+
+  Future<void> deleteAllCachedProduct() async {
     var box = await _hiveService.openbox();
     return _hiveService.deleteAllCachedProduct(box);
   }

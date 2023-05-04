@@ -1,4 +1,3 @@
-
 import 'package:ploff_kebab/export_files.dart';
 
 class EmptyPage extends StatelessWidget {
@@ -16,13 +15,6 @@ class EmptyPage extends StatelessWidget {
         ),
         automaticallyImplyLeading: false,
         scrolledUnderElevation: 0.0,
-        actions: [
-          IconButton(
-            onPressed: () {
-            },
-            icon: SvgPicture.asset(AppIcons.korzina),
-          ),
-        ],
       ),
       body: Center(
         child: Column(
@@ -50,6 +42,5 @@ class EmptyPage extends StatelessWidget {
         ),
       ),
     );
-    
   }
 }

@@ -15,7 +15,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
   int modifierindex = -1;
   int modifierPrice = 0;
   int price = 0;
-  int count = 0;
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +34,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
             showTopSnackBar(
               Overlay.of(context),
               const CustomSnackBar.info(
-                backgroundColor: AppColors.c22C348,
+                backgroundColor: AppColors.cFFCC00,
                 message: 'jarayonda',
               ),
             );
@@ -42,8 +42,8 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
             showTopSnackBar(
               Overlay.of(context),
               const CustomSnackBar.error(
-                backgroundColor: AppColors.c22C348,
-                message: 'error',
+                backgroundColor: AppColors.red,
+                message: Validations.SOMETHING_WENT_WRONG,
               ),
             );
           }
@@ -208,7 +208,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                           onTap: () {
                             setState(() {
                               if (count > 1) count--;
-                              price = count * widget.product.outPrice;
+                              count * widget.product.outPrice;
                             });
                           },
                         ),
@@ -222,7 +222,6 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                           onTap: () {
                             setState(() {
                               count++;
-                              price = count * widget.product.outPrice;
                             });
                           },
                           imagePath: AppIcons.plus,
@@ -232,7 +231,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                   ),
                   Expanded(
                     child: Text(
-                      (price).toString(),
+                      (widget.product.outPrice * count).toString(),
                       textAlign: TextAlign.end,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,

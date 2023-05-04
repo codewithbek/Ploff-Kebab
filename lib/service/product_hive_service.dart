@@ -15,7 +15,7 @@ class ProductHiveService {
   }
 
   Future<void> addProduct(Box box, ProductHiveModel cachedProductModel) async {
-    await box.add(cachedProductModel);
+    await box.put(cachedProductModel.id, cachedProductModel);
   }
 
   Future<void> deleteAllCachedProduct(Box box) async {
