@@ -1,4 +1,6 @@
+import 'package:ploff_kebab/core/widgets/dialogs/delete_dialogs.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/product_detail_cubit.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -8,12 +10,11 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CartBloc, CartState>(
+    return BlocBuilder<ProductDetailCubit, ProductDetailState>(
       builder: (context, state) {
-        if (state.products.isNotEmpty) {
+        if (state.productHiveModel!.isNotEmpty) {
           return Scaffold(
             backgroundColor: AppColors.cF0F0F0,
             appBar: AppBar(
@@ -27,7 +28,15 @@ class _CartPageState extends State<CartPage> {
               actions: [
                 IconButton(
                   onPressed: () {
-                    // deleteAllDialog(context);
+                    deleteAllDialog(
+                        context: context,
+                        onTap: () {
+                          context
+                              .read<ProductDetailCubit>()
+                              .deleteAllCachedProducts();
+                          Navigator.pop(context);
+                        },
+                        asktext: "Are you sure you want to clear cart");
                   },
                   icon: SvgPicture.asset(AppIcons.korzina),
                 ),
@@ -40,10 +49,10 @@ class _CartPageState extends State<CartPage> {
                 ),
               ),
               ...List.generate(
-                state.products.length,
+                state.productHiveModel!.length,
                 (index) => SliverToBoxAdapter(
                   child: CartsItem(
-                    aboutMeal: state.products[index],
+                    aboutMeal: state.productHiveModel![index],
                   ),
                 ),
               ),
@@ -94,9 +103,10 @@ class _CartPageState extends State<CartPage> {
                 ),
               ),
             ]),
-            bottomNavigationBar: SafeArea(
-              child: Padding(
-                padding: AppUtils.kPaddingAll12,
+            bottomNavigationBar: ColoredBox(
+              color: AppColors.white,
+              child: SafeArea(
+                minimum: AppUtils.kPaddingAll16,
                 child: PrimaryButtonWidget(
                   text: "Chekout order",
                   onTap: () {

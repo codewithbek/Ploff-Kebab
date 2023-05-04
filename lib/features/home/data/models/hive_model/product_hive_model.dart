@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:ploff_kebab/features/home/domain/entities/description_and_title_entity.dart';
 
 part 'product_hive_model.g.dart';
 
@@ -27,10 +26,10 @@ class ProductHiveModel extends HiveObject {
   late bool hasModifier;
 
   @HiveField(7)
-  late DescriptionAndTitleEntity title;
+  late String title;
 
   @HiveField(8)
-  late DescriptionAndTitleEntity description;
+  late String description;
 
   @HiveField(9)
   late bool active;

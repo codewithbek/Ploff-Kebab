@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
+import 'package:ploff_kebab/core/widgets/dialogs/delete_dialogs.dart';
 import 'package:ploff_kebab/export_files.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -87,9 +88,14 @@ class _SettingsPageState extends State<SettingsPage> with CacheMixin {
             AppUtils.kSpacer,
             GestureDetector(
               onTap: () {
-                localSource.setProfile(false);
-                Navigator.pushNamedAndRemoveUntil(
-                    context, RouteNames.main, (route) => false);
+                deleteAllDialog(
+                    context: context,
+                    onTap: () {
+                      localSource.setProfile(false);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, RouteNames.main, (route) => false);
+                    },
+                    asktext: "Are you sure you want to clear cart");
               },
               child: Container(
                 width: double.infinity,

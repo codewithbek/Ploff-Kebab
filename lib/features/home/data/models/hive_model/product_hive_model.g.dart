@@ -24,8 +24,8 @@ class ProductAdapter extends TypeAdapter<ProductHiveModel> {
       ..image = fields[4] as String
       ..activeInMenu = fields[5] as bool
       ..hasModifier = fields[6] as bool
-      ..title = fields[7] as DescriptionAndTitleEntity
-      ..description = fields[8] as DescriptionAndTitleEntity
+      ..title = fields[7] as String
+      ..description = fields[8] as String
       ..active = fields[9] as bool;
   }
 

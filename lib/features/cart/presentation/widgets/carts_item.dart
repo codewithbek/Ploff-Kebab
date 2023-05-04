@@ -1,4 +1,5 @@
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/home/data/models/hive_model/product_hive_model.dart';
 
 class CartsItem extends StatefulWidget {
   const CartsItem({
@@ -6,7 +7,7 @@ class CartsItem extends StatefulWidget {
     required this.aboutMeal,
   }) : super(key: key);
 
-  final ProductModel aboutMeal;
+  final ProductHiveModel aboutMeal;
 
   @override
   State<CartsItem> createState() => _CartsItemState();
@@ -18,7 +19,7 @@ class _CartsItemState extends State<CartsItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10.0.r),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(
@@ -33,30 +34,25 @@ class _CartsItemState extends State<CartsItem> {
             children: [
               SvgPicture.asset(
                 AppIcons.dish,
-                width: 88.0.w,
-                height: 88.0.h,
+                width: 50.0.w,
+                height: 50.0.h,
               ),
+              SizedBox(width: 10.w),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    width: 150.0.w,
-                    child: Text(
-                      widget.aboutMeal.title.uz,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextsyles.w600.copyWith(fontSize: 17.0.sp),
-                    ),
+                  Text(
+                    widget.aboutMeal.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextsyles.w600.copyWith(fontSize: 17.0.sp),
                   ),
                   SizedBox(height: 25.h),
-                  SizedBox(
-                    width: 150.0.w,
-                    child: Text(
-                      widget.aboutMeal.description.uz,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextsyles.w500.copyWith(fontSize: 15.0.sp),
-                    ),
+                  Text(
+                    " ${widget.aboutMeal.outPrice} sum",
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextsyles.w500.copyWith(fontSize: 15.0.sp),
                   ),
                 ],
               ),
@@ -65,56 +61,60 @@ class _CartsItemState extends State<CartsItem> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(right: 15.0.w),
-                    child: SvgPicture.asset(AppIcons.cancel),
-                  ),
+                  SvgPicture.asset(AppIcons.cancel),
                   SizedBox(height: 25.0.h),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: () => {
-                          setState(() => {
-                                if (count > 1)
-                                  {
-                                    count--,
-                                    // context
-                                    //     .read<CountMealsCubit>()
-                                    //     .removeMeals(),
-                                    // context.read<BottomNavigationCubit>().sum -=
-                                    //     widget.aboutMeal.outPrice,
-                                    // log(widget.aboutMeal.outPrice.toString()),
-                                  }
-                              }),
-                        },
-                        child: Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8.w),
-                            padding: EdgeInsets.all(10.r),
-                            height: 32.0.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0.r),
-                              color: AppColors.cFAFAFA,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(6.0.r),
+                          border: Border.all(
+                            color: AppColors.black.withOpacity(.1),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            IncDecButtons(
+                              marginH: 0,
+                              iconWiwth: 10.w,
+                              imagePath: AppIcons.minus,
+                              onTap: () {
+                                setState(() => {
+                                      if (count > 1)
+                                        {
+                                          count--,
+                                          // context
+                                          //     .read<CountMealsCubit>()
+                                          //     .removeMeals(),
+                                          // context.read<BottomNavigationCubit>().sum -=
+                                          //     widget.aboutMeal.outPrice,
+                                          // log(widget.aboutMeal.outPrice.toString()),
+                                        }
+                                    });
+                              },
                             ),
-                            child: SvgPicture.asset(AppIcons.minus)),
+                            Text(
+                              "$count",
+                              style: AppTextsyles.w500.copyWith(
+                                fontSize: 15.0.sp,
+                              ),
+                            ),
+                            IncDecButtons(
+                              marginH: 0,
+                              iconWiwth: 10.w,
+                              onTap: () {
+                                setState(() {
+                                  count++;
+                                  // price = count * widget.product.outPrice;
+                                });
+                              },
+                              imagePath: AppIcons.plus,
+                            )
+                          ],
+                        ),
                       ),
-                      Text("$count"),
-                      GestureDetector(
-                        onTap: () {
-                          // context.read<CountMealsCubit>().addMeals();
-                          // context.read<BottomNavigationCubit>().sum +=
-                          //     widget.aboutMeal.outPrice;
-                          setState(() => {count++});
-                        },
-                        child: Container(
-                            height: 32.h,
-                            margin: EdgeInsets.symmetric(horizontal: 8.0.w),
-                            padding: EdgeInsets.all(10.0.r),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0.r),
-                              color: AppColors.cFAFAFA,
-                            ),
-                            child: SvgPicture.asset(AppIcons.plus)),
-                      )
                     ],
                   ),
                 ],

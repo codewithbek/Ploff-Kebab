@@ -94,16 +94,16 @@ void homeFeature() {
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(dio: sl()),
   );
-  sl.registerLazySingleton<HomeLocalDataSource>(
-    () => HomeLocalDataSourceImpl(box: productBox),
-  );
+  // sl.registerLazySingleton<HomeLocalDataSource>(
+  //   () => HomeLocalDataSourceImpl(box: productBox),
+  // );
 }
 
 //-----------------------------------------
 void cartFeature() {
   // Bloc
   sl.registerFactory(
-    () => CartBloc(homeLocalDataSource: sl()),
+    () => CartBloc(),
   );
 }
 
@@ -155,5 +155,4 @@ Future<void> initHive() async {
   Directory directory = await getApplicationDocumentsDirectory();
   Hive.init(directory.path);
   box = await Hive.openBox<dynamic>(boxName);
-  productBox = await Hive.openBox<dynamic>(CacheKeys.product);
 }
