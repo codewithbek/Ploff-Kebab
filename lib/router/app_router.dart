@@ -5,8 +5,9 @@ import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dar
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/login/login_page.dart';
-import 'package:ploff_kebab/features/cart/presentation/blocs/cart_bloc.dart';
+import 'package:ploff_kebab/features/cart/presentation/blocs/counter_cubit.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/detail/product_detail_page.dart';
+import 'package:ploff_kebab/features/home/presentation/pages/location/location_page.dart';
 import 'package:ploff_kebab/features/profile/presentation/settings/settings_page.dart';
 
 import '../features/auth/presentation/pages/register/register_page.dart';
@@ -65,8 +66,8 @@ class AppRoutes {
               BlocProvider<HomeBloc>(
                 create: (_) => sl<HomeBloc>(),
               ),
-              BlocProvider<CartBloc>(
-                create: (_) => sl<CartBloc>(),
+              BlocProvider<CounterCubit>(
+                create: (_) => sl<CounterCubit>(),
               ),
             ],
             child: const MainPage(),
@@ -80,6 +81,10 @@ class AppRoutes {
             child: ProductDeatilPage(product: args),
           ),
         );
+      case RouteNames.location:
+        return CupertinoPageRoute(
+          builder: (_) => const AddLocationPage(),
+        );
       case RouteNames.settings:
         return CupertinoPageRoute(
           builder: (_) => const SettingsPage(),
@@ -89,6 +94,3 @@ class AppRoutes {
     return null;
   }
 }
-
-
-

@@ -37,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> with CacheMixin {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10.0.h),
+        padding: AppUtils.kPaddingAll16,
         child: Column(
           children: [
             Container(
@@ -85,37 +85,39 @@ class _SettingsPageState extends State<SettingsPage> with CacheMixin {
                 ],
               ),
             ),
-            AppUtils.kSpacer,
-            GestureDetector(
-              onTap: () {
-                myCustomDialog(
-                    context: context,
-                    onTap: () {
-                      localSource.setProfile(false);
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, RouteNames.main, (route) => false);
-                    },
-                    asktext: "Are you sure you want to clear cart");
-              },
-              child: Container(
-                width: double.infinity,
-                margin: EdgeInsets.symmetric(horizontal: 10.0.w),
-                padding: EdgeInsets.symmetric(vertical: 15.0.h),
-                decoration: BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.circular(10.0.r),
-                ),
-                child: Center(
-                  child: Text(
-                    "Log out",
-                    style: AppTextsyles.w500
-                        .copyWith(color: AppColors.red, fontSize: 15),
-                  ),
-                ),
-              ),
-            ),
-            AppUtils.kBoxHeight16
           ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        minimum: AppUtils.kPaddingAll16,
+        child: ElevatedButton(
+          autofocus: true,
+          style: ElevatedButton.styleFrom(
+            elevation: 0.0,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.r)),
+            // disabledBackgroundColor: AppColors.white,
+            backgroundColor: AppColors.white,
+            minimumSize: Size(200.w, 52.h),
+            maximumSize: Size(200.w, 52.h),
+          ),
+          onPressed: () {
+            myCustomDialog(
+                context: context,
+                onTap: () {
+                  localSource.setProfile(false);
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, RouteNames.main, (route) => false);
+                },
+                asktext: "Are you sure?\n Do you want to delete your account?");
+          },
+          child: Center(
+            child: Text(
+              "Log out",
+              style: AppTextsyles.w500
+                  .copyWith(color: AppColors.red, fontSize: 15),
+            ),
+          ),
         ),
       ),
     );

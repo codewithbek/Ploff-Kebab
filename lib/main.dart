@@ -1,7 +1,7 @@
 import 'package:ploff_kebab/core/local_source/cached_product.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/home/data/models/hive_model/product_hive_model.dart';
-import 'package:ploff_kebab/features/home/presentation/cubit/product_detail_cubit.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/product_detail/product_detail_cubit.dart';
 import 'package:ploff_kebab/service/product_hive_service.dart';
 import 'injector_container.dart' as di;
 

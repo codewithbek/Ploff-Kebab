@@ -1,7 +1,8 @@
 import 'package:ploff_kebab/core/widgets/dialogs/delete_dialogs.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/cart/presentation/blocs/counter_cubit.dart';
 import 'package:ploff_kebab/features/home/data/models/hive_model/product_hive_model.dart';
-import 'package:ploff_kebab/features/home/presentation/cubit/product_detail_cubit.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/product_detail/product_detail_cubit.dart';
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class CartsItem extends StatefulWidget {
@@ -22,12 +23,12 @@ class _CartsItemState extends State<CartsItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(
           bottom: BorderSide(
-            color: AppColors.black.withOpacity(.1),
+            color: AppColors.c858585.withOpacity(.1),
           ),
         ),
       ),
@@ -50,7 +51,12 @@ class _CartsItemState extends State<CartsItem> {
                     overflow: TextOverflow.ellipsis,
                     style: AppTextsyles.w600.copyWith(fontSize: 17.0.sp),
                   ),
-                  SizedBox(height: 25.h),
+                  Text(widget.aboutMeal.description,
+                      style: AppTextsyles.w400
+                          .copyWith(fontSize: 12.sp, color: AppColors.c858585),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis),
+                  SizedBox(height: 30.h),
                   Text(
                     " ${widget.aboutMeal.outPrice} sum",
                     maxLines: 2,
@@ -78,53 +84,59 @@ class _CartsItemState extends State<CartsItem> {
                                 "Are you sure?\n Do you want to remove a product from the list?");
                       },
                       child: SvgPicture.asset(AppIcons.cancel)),
-                  SizedBox(height: 25.0.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          borderRadius: BorderRadius.circular(6.0.r),
-                          border: Border.all(
-                            color: AppColors.black.withOpacity(.1),
-                          ),
-                        ),
-                        child: Row(
-                          children: [
-                            IncDecButtons(
-                              marginH: 6.w,
-                              iconWiwth: 10.w,
-                              imagePath: AppIcons.minus,
-                              onTap: () {
-                                setState(() => {
-                                      if (count > 1)
-                                        {
-                                          count--,
-                                        }
-                                    });
-                              },
-                            ),
-                            Text(
-                              "$count",
-                              style: AppTextsyles.w500.copyWith(
-                                fontSize: 15.0.sp,
+                  SizedBox(height: 40.0.h),
+                  BlocBuilder<CounterCubit, CounterState>(
+                    builder: (context, state) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              borderRadius: BorderRadius.circular(6.0.r),
+                              border: Border.all(
+                                color: AppColors.black.withOpacity(.1),
                               ),
                             ),
-                            IncDecButtons(
-                              marginH: 6.w,
-                              iconWiwth: 10.w,
-                              onTap: () {
-                                setState(() {
-                                  count++;
-                                });
-                              },
-                              imagePath: AppIcons.plus,
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
+                            child: Row(
+                              children: [
+                                IncDecButtons(
+                                  marginH: 5.w,
+                                  iconWiwth: 10.w,
+                                  imagePath: AppIcons.minus,
+                                  onTap: () {
+                                    setState(() => {
+                                          if (count > 1)
+                                            {
+                                              count--,
+                                            }
+                                        });
+                                    // context.read<CounterCubit>().decrement();
+                                  },
+                                ),
+                                Text(
+                                  count.toString(),
+                                  style: AppTextsyles.w500.copyWith(
+                                    fontSize: 15.0.sp,
+                                  ),
+                                ),
+                                IncDecButtons(
+                                  marginH: 5.w,
+                                  iconWiwth: 10.w,
+                                  onTap: () {
+                                    setState(() {
+                                      count++;
+                                    });
+                                    // context.read<CounterCubit>().increment();
+                                  },
+                                  imagePath: AppIcons.plus,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               )

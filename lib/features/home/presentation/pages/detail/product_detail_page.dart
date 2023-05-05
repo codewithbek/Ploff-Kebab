@@ -1,5 +1,5 @@
 import 'package:ploff_kebab/export_files.dart';
-import 'package:ploff_kebab/features/home/presentation/cubit/product_detail_cubit.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/product_detail/product_detail_cubit.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 

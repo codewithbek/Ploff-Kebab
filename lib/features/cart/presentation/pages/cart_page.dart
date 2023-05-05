@@ -1,6 +1,6 @@
 import 'package:ploff_kebab/core/widgets/dialogs/delete_dialogs.dart';
 import 'package:ploff_kebab/export_files.dart';
-import 'package:ploff_kebab/features/home/presentation/cubit/product_detail_cubit.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/product_detail/product_detail_cubit.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});

@@ -13,10 +13,12 @@ class PloffApp extends StatelessWidget {
           title: 'Ploff & Kebab',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+              primaryColor: AppColors.white,
+              useMaterial3: true,
               appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            elevation: 0,
-          )),
+                backgroundColor: Colors.white,
+                elevation: 0,
+              )),
           navigatorKey: rootNavigatorKey,
           onGenerateRoute: AppRoutes.onGenerateRoute,
         );

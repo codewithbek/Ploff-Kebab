@@ -23,13 +23,18 @@ class CategoryWithProductsItem extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             var product = category.products[index];
             return _productInfoItem(
-              onTap: () {
+              onTap: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
-                Navigator.pushNamed(
+                final result = await Navigator.pushNamed(
                   rootNavigatorKey.currentContext!,
                   RouteNames.prouductDetail,
                   arguments: product,
                 );
+                if (result != null) {
+                  context
+                      .read<MainBloc>()
+                      .add(TabChangeEvent(index: BottomMenu.cart));
+                }
               },
               title: product.title.uz,
               subtitle: product.description.uz,

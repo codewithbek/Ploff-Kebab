@@ -8,10 +8,9 @@ import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart'
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
-import 'package:ploff_kebab/features/cart/presentation/blocs/cart_bloc.dart';
 
 import 'features/auth/data/data_source/remote/auth_remote_data_source.dart';
-import 'features/home/data/datasources/local/home_local_data_source.dart';
+import 'features/cart/presentation/blocs/counter_cubit.dart';
 
 final sl = GetIt.instance;
 late Box<dynamic> box;
@@ -103,7 +102,7 @@ void homeFeature() {
 void cartFeature() {
   // Bloc
   sl.registerFactory(
-    () => CartBloc(),
+    () => CounterCubit(),
   );
 }
 

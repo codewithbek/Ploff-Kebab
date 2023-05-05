@@ -7,6 +7,7 @@ Future<dynamic> myCustomDialog(
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
+      backgroundColor: Colors.white,
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0.r)),
       content: Column(
@@ -40,7 +41,7 @@ Future<dynamic> myCustomDialog(
                     Navigator.pop(context),
                   },
                   child: const DialogButtons(
-                    color: AppColors.cF0F0F0,
+                    color: AppColors.white,
                     text: 'Cancel',
                   ),
                 ),
