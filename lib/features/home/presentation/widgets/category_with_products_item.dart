@@ -25,6 +25,9 @@ class CategoryWithProductsItem extends StatelessWidget {
             return _productInfoItem(
               onTap: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
+                context
+                    .read<HomeBloc>()
+                    .add(GetProducByIdtEvent(productId: product.id));
                 final result = await Navigator.pushNamed(
                   rootNavigatorKey.currentContext!,
                   RouteNames.prouductDetail,
@@ -90,7 +93,7 @@ class CategoryWithProductsItem extends StatelessWidget {
                       SizedBox(height: 8.h),
                       Text(subtitle,
                           style: const TextStyle(
-                              fontSize: 13, color: AppColors.c858585),
+                              fontSize: 13, color: AppColors.black3),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis),
                       SizedBox(height: 18.h),

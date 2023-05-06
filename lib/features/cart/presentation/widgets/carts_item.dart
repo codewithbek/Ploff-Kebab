@@ -28,7 +28,7 @@ class _CartsItemState extends State<CartsItem> {
         color: AppColors.white,
         border: Border(
           bottom: BorderSide(
-            color: AppColors.c858585.withOpacity(.1),
+            color: AppColors.black3.withOpacity(.1),
           ),
         ),
       ),
@@ -53,7 +53,7 @@ class _CartsItemState extends State<CartsItem> {
                   ),
                   Text(widget.aboutMeal.description,
                       style: AppTextsyles.w400
-                          .copyWith(fontSize: 12.sp, color: AppColors.c858585),
+                          .copyWith(fontSize: 12.sp, color: AppColors.black3),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis),
                   SizedBox(height: 30.h),

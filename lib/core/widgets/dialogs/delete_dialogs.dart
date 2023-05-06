@@ -25,7 +25,7 @@ Future<dynamic> myCustomDialog(
             asktext,
             style: AppTextsyles.w400.copyWith(
               fontSize: 15.0.sp,
-              color: AppColors.c858585,
+              color: AppColors.black3,
             ),
             textAlign: TextAlign.center,
           ),

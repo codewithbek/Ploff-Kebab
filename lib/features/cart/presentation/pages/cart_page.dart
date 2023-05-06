@@ -88,7 +88,7 @@ class _CartPageState extends State<CartPage> {
                             hintText: "Add comment to order",
                             hintStyle: AppTextsyles.w400.copyWith(
                               fontSize: 15.0.sp,
-                              color: AppColors.c858585,
+                              color: AppColors.black3,
                             ),
                           ),
                         ),

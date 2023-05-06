@@ -22,6 +22,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       GetCategoriesWithProductsEvent event, Emitter<HomeState> emit) async {
     final result = await getCategoriesWithProductsUseCase(NoParams());
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    debugPrint("CategoriesWithProducts Loading");
+
     result.fold(
       (l) {
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
@@ -38,6 +40,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   void _getBanner(GetBannerEvent event, Emitter<HomeState> emit) async {
     final result = await getBanner(NoParams());
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+    debugPrint("Banner Loading>>");
     result.fold(
       (l) {
         emit(state.copyWith(status: FormzSubmissionStatus.failure));

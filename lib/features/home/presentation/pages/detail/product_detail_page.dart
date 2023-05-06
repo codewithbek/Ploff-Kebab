@@ -12,10 +12,19 @@ class ProductDeatilPage extends StatefulWidget {
 }
 
 class _ProductDeatilPageState extends State<ProductDeatilPage> {
+  late ProductDeatilPage _myWidget;
+
+  @override
+  void initState() {
+    _myWidget = widget;
+    super.initState();
+  }
+
   int modifierindex = -1;
   int modifierPrice = 0;
   int price = 0;
-  int count = 1;
+
+  var count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -213,7 +222,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                           },
                         ),
                         Text(
-                          "$count",
+                          widget.product.count,
                           style: AppTextsyles.w500.copyWith(
                             fontSize: 15.0.sp,
                           ),

@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> with CacheMixin {
           Text(
             "Version 1.0.0",
             style: AppTextsyles.w400
-                .copyWith(color: AppColors.c858585, fontSize: 15.sp),
+                .copyWith(color: AppColors.black3, fontSize: 15.sp),
           ),
           SizedBox(height: 16.0.h),
         ],
