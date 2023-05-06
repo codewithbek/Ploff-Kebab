@@ -9,4 +9,5 @@ abstract class HomeRemoteDataSource {
   Future<CategoriesWithProductsModel> getCategoriesWithProducts();
 
   Future<BannerModel> getBanners();
+  Future<ProductModel> getProductById({required String productId});
 }

@@ -26,13 +26,14 @@ class ProductAdapter extends TypeAdapter<ProductHiveModel> {
       ..hasModifier = fields[6] as bool
       ..title = fields[7] as String
       ..description = fields[8] as String
-      ..active = fields[9] as bool;
+      ..active = fields[9] as bool
+      ..count = fields[10] as String?;
   }
 
   @override
   void write(BinaryWriter writer, ProductHiveModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -52,7 +53,9 @@ class ProductAdapter extends TypeAdapter<ProductHiveModel> {
       ..writeByte(8)
       ..write(obj.description)
       ..writeByte(9)
-      ..write(obj.active);
+      ..write(obj.active)
+      ..writeByte(10)
+      ..write(obj.count);
   }
 
   @override

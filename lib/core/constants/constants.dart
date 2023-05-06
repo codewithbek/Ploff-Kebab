@@ -25,12 +25,12 @@ class AppKeys {
   static const FCM_TOKEN = 'fcm_token';
   static const ACCESS_TOKEN = 'access_token';
   static const REFRESH_TOKEN = 'refresh_token';
-
   static const NAME = 'name';
   static const PHONE = 'phone';
   static const pinCode = 'pincode';
   static const biometrics = 'biometrics';
   static const hasProfile = 'auth';
+  static const userLocationName = "user_location_name";
 }
 
 class CacheKeys {
@@ -49,7 +49,7 @@ class Urls {
   static const GET_CATEGORIES_WITH_PRODUCTS_URL = '/v2/category-with-products';
   static const GET_BANNER_URL = '/v1/banner';
 
-  static const SEARCH_PRODUCT = '/v2/product';
+  static const PRODUCT_BY_ID = '/v2/product/';
 }
 
 class DatabaseKeys {

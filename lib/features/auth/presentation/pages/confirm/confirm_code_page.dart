@@ -95,12 +95,7 @@ class _ConfirmCodePageState extends State<ConfirmCodePage> with CacheMixin {
                 setState(() {
                   putLenght = value.length;
                 });
-                // context.read<ConfirmOtpBloc>().add(
-                //   SendOtpChangedEvent(
-                //     otp: /*state.otp ?? "",*/ value,
-                //     smsId: widget.smsId,
-                //   ),
-                // );
+               
               },
               length: 6,
               autofocus: true,

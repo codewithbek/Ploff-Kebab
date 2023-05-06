@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:ploff_kebab/core/constants/constants.dart';
+import 'package:ploff_kebab/features/home/data/models/hive_model/user_locations.dart';
 
 class LocalSource {
   final Box<dynamic> box;

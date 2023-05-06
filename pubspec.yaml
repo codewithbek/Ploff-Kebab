@@ -16,7 +16,7 @@ dependencies:
 
 
   cupertino_icons: ^1.0.2
-
+  intl: ^0.17.0
   # di
   get_it: ^7.2.0
   # UI
@@ -38,6 +38,8 @@ dependencies:
   # forms
   formz: ^0.6.0
   dartz: ^0.10.1
+  # storage
+  shared_preferences: ^2.0.15
   # hive
   hive: ^2.2.3
   hive_flutter: ^1.1.0
@@ -56,8 +58,7 @@ dependencies:
   # json annotation
   json_annotation: ^4.8.0
   pinput: ^2.2.31
-  # biometric auth
-  local_auth: ^2.1.6
+  # animation
   zoom_tap_animation: ^1.1.0
 
 

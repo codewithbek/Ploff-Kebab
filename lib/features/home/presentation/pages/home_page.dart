@@ -1,4 +1,9 @@
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/home/data/models/hive_model/user_locations.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/location/current_location_cubit.dart';
+import 'package:ploff_kebab/features/home/presentation/pages/location/widgets/choose_location.dart';
+import 'package:ploff_kebab/service/hive_service.dart';
+import 'package:ploff_kebab/service/location_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,6 +29,8 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+  LocationService locationService = LocationService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +40,33 @@ class _HomePageState extends State<HomePage> {
           elevation: 0.0,
           scrolledUnderElevation: 0.0,
           title: GestureDetector(
-            onTap: () {},
+            onTap: () async {
+              await locationService.getLocation();
+              UserLocationsHiveSerive.instance.userLocations.isEmpty
+                  ? Navigator.pushNamed(context, RouteNames.location)
+                  : await chooseLocation(context);
+            },
             child: Row(
               children: [
                 SvgPicture.asset(AppIcons.location, height: 15.h),
                 SizedBox(width: 10.w),
-                Text(
-                  'Add Location',
-                  style: AppTextsyles.w400
-                      .copyWith(color: AppColors.black1, fontSize: 15.sp),
-                ),
+                UserLocationsHiveSerive.instance.userLocations.isNotEmpty
+                    ? BlocBuilder<CurrentLocationCubit, CurrentLocationState>(
+                        builder: (context, state) {
+                          return Text(
+                            state.locationName,
+                            style:
+                                AppTextsyles.w400.copyWith(fontSize: 15.0.sp),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        },
+                      )
+                    : Text(
+                        'Add Location',
+                        style: AppTextsyles.w400
+                            .copyWith(color: AppColors.black1, fontSize: 15.sp),
+                      ),
                 SizedBox(width: 10.w),
                 SvgPicture.asset(AppIcons.arrowDown)
               ],

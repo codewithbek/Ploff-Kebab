@@ -8,6 +8,7 @@ import 'package:ploff_kebab/features/auth/domain/usecases/register_usecase.dart'
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
+import 'package:ploff_kebab/features/home/domain/usecases/get_product_by_id_usecase.dart';
 
 import 'features/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'features/cart/presentation/blocs/counter_cubit.dart';
@@ -65,9 +66,9 @@ void homeFeature() {
   ///Bloc
   sl.registerFactory(
     () => HomeBloc(
-      getBanner: sl(),
-      getCategoriesWithProductsUseCase: sl(),
-    ),
+        getBanner: sl(),
+        getCategoriesWithProductsUseCase: sl(),
+        getProductByIdUseCase: sl()),
   );
 
   // sl.registerLazySingleton(() => SearchBloc(getLoungesUseCase: sl()));
@@ -79,6 +80,9 @@ void homeFeature() {
 
   sl.registerLazySingleton<GetCategoriesWithProductsUseCase>(
     () => GetCategoriesWithProductsUseCase(repository: sl()),
+  );
+  sl.registerLazySingleton<GetProductByIdUseCase>(
+    () => GetProductByIdUseCase(repository: sl()),
   );
 
   ///Repositories

@@ -3,8 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:ploff_kebab/features/home/data/models/product_model/product_model.dart';
 import 'package:ploff_kebab/features/home/domain/entities/description_and_title_entity.dart';
 
-
-
 class ProductEntity extends Equatable {
   final String id;
   final int outPrice;
@@ -27,7 +25,7 @@ class ProductEntity extends Equatable {
   final bool active;
   final String iikoId;
   final String jowiId;
-
+  final String count;
   const ProductEntity({
     this.id = '',
     this.outPrice = -1,
@@ -48,6 +46,7 @@ class ProductEntity extends Equatable {
     this.active = true,
     this.iikoId = '',
     this.jowiId = '',
+    this.count = '',
   });
 
   @override

@@ -10,4 +10,5 @@ abstract class HomeRepository {
       getCategoriesWithProducts();
 
   Future<Either<Failure, BannerEntity>> getBanners();
+  Future<Either<Failure, ProductEntity>> getProductBy({ required String productId});
 }

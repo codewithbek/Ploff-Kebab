@@ -246,10 +246,13 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
               BlocBuilder<ProductDetailCubit, ProductDetailState>(
                 builder: (context, state) {
                   return PrimaryButtonWidget(
-                    onTap: () {
+                    onTap: () async {
                       context
                           .read<ProductDetailCubit>()
                           .addProduct(productModel: widget.product);
+
+                      await Future.delayed(const Duration(seconds: 4));
+                      Navigator.pop(context, true);
                     },
                     text: "Add",
                   );

@@ -1,7 +1,9 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:ploff_kebab/export_files.dart';
+import 'package:ploff_kebab/features/home/data/models/hive_model/user_locations.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/location/widgets/mini_text_fields.dart';
+import 'package:ploff_kebab/service/hive_service.dart';
 import 'package:ploff_kebab/service/location_service.dart';
 
 class AddLocationPage extends StatefulWidget {
@@ -83,7 +85,7 @@ class _AddLocationPageState extends State<AddLocationPage> {
                     ),
                   ),
                   Text(
-                    "delivery_address",
+                    "Delivery address",
                     style: AppTextsyles.w600.copyWith(fontSize: 20.sp),
                   ),
                   SizedBox(height: 15.h),
@@ -130,7 +132,7 @@ class _AddLocationPageState extends State<AddLocationPage> {
                     child: TextField(
                       controller: addressController,
                       decoration: InputDecoration(
-                        hintText: "address_name",
+                        hintText: "Address_name",
                         border: InputBorder.none,
                       ),
                     ),
@@ -139,22 +141,24 @@ class _AddLocationPageState extends State<AddLocationPage> {
                   PrimaryButtonWidget(
                     text: "confirm",
                     onTap: () {
-                      //   if (addressController.text.isEmpty ||
-                      //       (locationService.placemark?[0].administrativeArea) == null &&
-                      //           (helper.placemark?[0].locality) == null) {
-                      //     Helper.showFailedSnackBar(
-                      //         tr("please_fill_fields"), context);
-                      //   } else {
-                      //     HiveService.instance.addLocationToStorage(
-                      //       UserLocations(
-                      //         address:
-                      //             (helper.placemark?[0].administrativeArea)! +
-                      //                 (helper.placemark?[0].locality)!,
-                      //         nameLocation: addressController.text,
-                      //       ),
-                      //     );
-                      //     Navigator.pop(context);
-                      //   }
+                      if (addressController.text.isEmpty ||
+                          (locationService.placemark?[0].administrativeArea) ==
+                                  null &&
+                              (locationService.placemark?[0].locality) ==
+                                  null) {
+                        LocationService.showFailedSnackBar(
+                            "please_fill_fields", context);
+                      } else {
+                        UserLocationsHiveSerive.instance.addLocationToStorage(
+                          UserLocations(
+                            address: (locationService
+                                    .placemark?[0].administrativeArea)! +
+                                (locationService.placemark?[0].locality)!,
+                            nameLocation: addressController.text,
+                          ),
+                        );
+                        Navigator.pop(context);
+                      }
                     },
                   ),
                 ],

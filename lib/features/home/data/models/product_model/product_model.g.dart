@@ -35,6 +35,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
               .fromJson(json['title'] as Map<String, dynamic>?),
       toTime: json['to_time'] as String? ?? '',
       type: json['type'] as String? ?? '',
+      count: json['count'] as String? ?? '',
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
@@ -60,4 +61,5 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'active': instance.active,
       'iiko_id': instance.iikoId,
       'jowi_id': instance.jowiId,
+      'count': instance.count,
     };

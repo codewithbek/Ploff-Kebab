@@ -33,6 +33,9 @@ class ProductHiveModel extends HiveObject {
 
   @HiveField(9)
   late bool active;
+
+  @HiveField(10)
+  String? count;
 }
 
   // ProductHiveModel({

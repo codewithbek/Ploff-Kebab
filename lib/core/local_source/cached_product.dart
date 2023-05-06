@@ -1,6 +1,6 @@
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/home/data/models/hive_model/product_hive_model.dart';
-import 'package:ploff_kebab/service/product_hive_service.dart';
+import 'package:ploff_kebab/service/hive_service.dart';
 
 class CachedProducts {
   CachedProducts({required ProductHiveService hiveService})
@@ -23,7 +23,8 @@ class CachedProducts {
           ..description = productModel.description.uz
           ..type = productModel.type
           ..currency = productModel.currency
-          ..hasModifier = productModel.hasModifier);
+          ..hasModifier = productModel.hasModifier
+          ..count = productModel.count);
   }
 
   Future<List<ProductHiveModel>> getCachedProducts() async {
@@ -35,6 +36,7 @@ class CachedProducts {
     var box = await _hiveService.openbox();
     return _hiveService.deleteAllCachedProduct(box);
   }
+
   Future<void> deleteCachedProductById(String id) async {
     var box = await _hiveService.openbox();
     return _hiveService.deleteCachedProductById(box, id);

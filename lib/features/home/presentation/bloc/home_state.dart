@@ -4,22 +4,26 @@ class HomeState extends Equatable {
   final FormzSubmissionStatus status;
   final CategoriesWithProductsEntity categoriesWithProducts;
   final BannerEntity banner;
+  final ProductEntity productById;
   const HomeState({
     this.status = FormzSubmissionStatus.initial,
     this.categoriesWithProducts = const CategoriesWithProductsEntity(),
     this.banner = const BannerEntity(),
+    this.productById = const ProductEntity() ,
   });
 
-  HomeState copyWith(
-          {FormzSubmissionStatus? status,
-          CategoriesWithProductsEntity? categoriesWithProducts,
-          BannerEntity? banner,
-         }) =>
+  HomeState copyWith({
+    FormzSubmissionStatus? status,
+    CategoriesWithProductsEntity? categoriesWithProducts,
+    BannerEntity? banner,
+    ProductEntity? productById,
+  }) =>
       HomeState(
         banner: banner ?? this.banner,
         categoriesWithProducts:
             categoriesWithProducts ?? this.categoriesWithProducts,
         status: status ?? this.status,
+        productById: productById ?? this.productById,
       );
 
   @override
@@ -27,5 +31,6 @@ class HomeState extends Equatable {
         status,
         categoriesWithProducts,
         banner,
+        productById,
       ];
 }

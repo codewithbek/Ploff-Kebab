@@ -11,9 +11,9 @@ class GetCategoriesWithProductsEvent extends HomeEvent {}
 
 class GetBannerEvent extends HomeEvent {}
 
-class AddProductEvent extends HomeEvent {
-  final ProductModel product;
-  const AddProductEvent({
-    required this.product,
+class GetProducByIdtEvent extends HomeEvent {
+  final String productId;
+  const GetProducByIdtEvent({
+    required this.productId,
   });
 }

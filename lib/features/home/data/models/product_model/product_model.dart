@@ -26,6 +26,7 @@ class ProductModel extends ProductEntity {
     super.title,
     super.toTime,
     super.type,
+    super.count,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
