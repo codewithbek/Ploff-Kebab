@@ -1,5 +1,5 @@
 import 'package:ploff_kebab/core/mixins/cache_mixin.dart';
-import 'package:ploff_kebab/core/widgets/custom_text_field.dart';
+import 'package:ploff_kebab/core/widgets/textfields/custom_text_field.dart';
 import 'package:ploff_kebab/export_files.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm_code_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';

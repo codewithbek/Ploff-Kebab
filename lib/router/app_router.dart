@@ -6,6 +6,8 @@ import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bl
 import 'package:ploff_kebab/features/auth/presentation/pages/confirm/confirm_code_page.dart';
 import 'package:ploff_kebab/features/auth/presentation/pages/login/login_page.dart';
 import 'package:ploff_kebab/features/cart/presentation/blocs/counter_cubit.dart';
+import 'package:ploff_kebab/features/cart/presentation/pages/checkout/checkout_page.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/location/current_location_cubit.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/detail/product_detail_page.dart';
 import 'package:ploff_kebab/features/home/presentation/pages/location/location_page.dart';
 import 'package:ploff_kebab/features/profile/presentation/settings/settings_page.dart';
@@ -84,6 +86,10 @@ class AppRoutes {
       case RouteNames.location:
         return CupertinoPageRoute(
           builder: (_) => const AddLocationPage(),
+        );
+      case RouteNames.checkout:
+        return CupertinoPageRoute(
+          builder: (_) => const CheckOutPage(),
         );
       case RouteNames.settings:
         return CupertinoPageRoute(

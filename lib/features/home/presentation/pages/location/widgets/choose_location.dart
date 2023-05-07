@@ -18,7 +18,7 @@ Future<dynamic> chooseLocation(BuildContext context) {
         children: [
           Center(
             child: Text(
-              "my_locations",
+              "My locations",
               style: AppTextsyles.w600.copyWith(fontSize: 20.0.sp),
             ),
           ),
@@ -51,9 +51,9 @@ Future<dynamic> chooseLocation(BuildContext context) {
                         () => {
                           SharedPreferencesService.instance.sharedPreferences
                               .setInt("current_loc_index", index),
-                          context
-                              .read<CurrentLocationCubit>()
-                              .changeLocationName(index: index)
+                          // context
+                          //     .read<CurrentLocationCubit>()
+                          //     .changeLocationName(index: index)
                         },
                       )
                     },

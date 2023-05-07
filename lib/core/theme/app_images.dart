@@ -9,4 +9,5 @@ class AppImages {
   static const String smallPloffLogo = "assets/images/ploff_logo.png";
   static const String uzbFlag = "assets/images/uzb_flag.png";
   static const String meal = "assets/images/meal1.png";
+  static const String position = "assets/images/position.png";
 }

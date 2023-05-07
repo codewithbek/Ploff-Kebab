@@ -222,7 +222,7 @@ class _ProductDeatilPageState extends State<ProductDeatilPage> {
                           },
                         ),
                         Text(
-                          widget.product.count,
+                          "$count",
                           style: AppTextsyles.w500.copyWith(
                             fontSize: 15.0.sp,
                           ),

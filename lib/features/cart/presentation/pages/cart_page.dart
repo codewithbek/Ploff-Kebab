@@ -107,11 +107,36 @@ class _CartPageState extends State<CartPage> {
               color: AppColors.white,
               child: SafeArea(
                 minimum: AppUtils.kPaddingAll16,
-                child: PrimaryButtonWidget(
-                  text: "Chekout order",
-                  onTap: () {
-                    // Navigator.pushReplacementNamed(context, RouteNames.main);
-                  },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Padding(
+                      padding: AppUtils.kPaddingAll4,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Total Amount:",
+                            style: AppTextsyles.w500.copyWith(
+                                fontSize: 18.0.sp, color: AppColors.black2),
+                          ),
+                          Text(
+                            state.productHiveModel![0].outPrice.toString(),
+                            style: AppTextsyles.w700.copyWith(
+                              fontSize: 20.0.sp,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    PrimaryButtonWidget(
+                      text: "Chekout order",
+                      onTap: () {
+                        Navigator.pushNamed(context, RouteNames.checkout);
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),

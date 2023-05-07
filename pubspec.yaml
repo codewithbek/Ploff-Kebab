@@ -46,7 +46,7 @@ dependencies:
   hive_generator: ^2.0.0
   # for location
   geocoding: ^2.0.5
-  google_maps_flutter: ^2.2.1
+  yandex_mapkit: ^3.2.0
   geolocator: ^9.0.2
   # internet checker
   connectivity_plus: ^3.0.4

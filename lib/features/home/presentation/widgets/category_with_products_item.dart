@@ -25,9 +25,9 @@ class CategoryWithProductsItem extends StatelessWidget {
             return _productInfoItem(
               onTap: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
-                context
-                    .read<HomeBloc>()
-                    .add(GetProducByIdtEvent(productId: product.id));
+                // context
+                //     .read<HomeBloc>()
+                //     .add(GetProducByIdtEvent(productId: product.id));
                 final result = await Navigator.pushNamed(
                   rootNavigatorKey.currentContext!,
                   RouteNames.prouductDetail,

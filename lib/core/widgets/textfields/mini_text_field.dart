@@ -1,4 +1,5 @@
 import 'package:ploff_kebab/export_files.dart';
+
 class MiniTextFields extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
@@ -21,6 +22,8 @@ class MiniTextFields extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 10.0.w),
         child: TextField(
           decoration: InputDecoration(
+            hintStyle: AppTextsyles.w400
+                .copyWith(fontSize: 15.sp, color: AppColors.black3),
             hintText: hintText,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0.r),
