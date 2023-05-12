@@ -5,6 +5,7 @@ import 'package:ploff_kebab/features/home/data/models/hive_model/user_locations.
 import 'package:ploff_kebab/features/home/presentation/cubit/product_detail/product_detail_cubit.dart';
 import 'package:ploff_kebab/service/hive_service.dart';
 import 'package:ploff_kebab/service/shared_preferences_serive.dart';
+import 'features/home/presentation/cubit/location/current_location_cubit.dart';
 import 'injector_container.dart' as di;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,12 +28,19 @@ Future<void> main() async {
     statusBarColor: AppColors.white,
     statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(BlocProvider(
-    create: (context) => ProductDetailCubit(
-      cachedProducts: CachedProducts(
-        hiveService: productHiveService,
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => ProductDetailCubit(
+          cachedProducts: CachedProducts(
+            hiveService: productHiveService,
+          ),
+        )..getCachedProducts(),
       ),
-    )..getCachedProducts(),
+      BlocProvider(
+        create: (context) => CurrentLocationCubit(),
+      ),
+    ],
     child: const PloffApp(),
   ));
   FlutterNativeSplash.remove();

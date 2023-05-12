@@ -68,9 +68,7 @@ class AppRoutes {
               BlocProvider<HomeBloc>(
                 create: (_) => sl<HomeBloc>(),
               ),
-              BlocProvider<CounterCubit>(
-                create: (_) => sl<CounterCubit>(),
-              ),
+
             ],
             child: const MainPage(),
           ),

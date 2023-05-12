@@ -14,8 +14,10 @@ Future<dynamic> chooseLocation(BuildContext context) {
     ),
     builder: (context) => StatefulBuilder(builder: (context, setState) {
       return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
+          AppUtils.kBoxHeight12,
           Center(
             child: Text(
               "My locations",
@@ -51,9 +53,9 @@ Future<dynamic> chooseLocation(BuildContext context) {
                         () => {
                           SharedPreferencesService.instance.sharedPreferences
                               .setInt("current_loc_index", index),
-                          // context
-                          //     .read<CurrentLocationCubit>()
-                          //     .changeLocationName(index: index)
+                          context
+                              .read<CurrentLocationCubit>()
+                              .changeLocationName(index: index)
                         },
                       )
                     },
@@ -62,8 +64,8 @@ Future<dynamic> chooseLocation(BuildContext context) {
               ],
             ),
           ),
-          Container(
-            padding: EdgeInsets.all(16.0.r),
+          Padding(
+            padding: AppUtils.kPaddingAll16,
             child: PrimaryButtonWidget(
               text: "Add location",
               onTap: () {

@@ -9,6 +9,7 @@ import 'package:ploff_kebab/features/auth/presentation/bloc/confirm_code/confirm
 import 'package:ploff_kebab/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:ploff_kebab/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:ploff_kebab/features/home/domain/usecases/get_product_by_id_usecase.dart';
+import 'package:ploff_kebab/features/home/presentation/cubit/location/current_location_cubit.dart';
 
 import 'features/auth/data/data_source/remote/auth_remote_data_source.dart';
 import 'features/cart/presentation/blocs/counter_cubit.dart';
@@ -70,6 +71,7 @@ void homeFeature() {
         getCategoriesWithProductsUseCase: sl(),
         getProductByIdUseCase: sl()),
   );
+  // sl.registerFactory(() => CurrentLocationCubit());
 
   // sl.registerLazySingleton(() => SearchBloc(getLoungesUseCase: sl()));
 

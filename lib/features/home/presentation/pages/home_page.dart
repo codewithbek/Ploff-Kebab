@@ -42,9 +42,9 @@ class _HomePageState extends State<HomePage> {
           title: GestureDetector(
             onTap: () async {
               await locationService.getLocation();
-              // UserLocationsHiveSerive.instance.userLocations.isEmpty
-              Navigator.pushNamed(context, RouteNames.location);
-              // : await chooseLocation(context);
+              UserLocationsHiveSerive.instance.userLocations.isEmpty
+                  ? Navigator.pushNamed(context, RouteNames.location)
+                  : await chooseLocation(context);
             },
             child: Row(
               children: [

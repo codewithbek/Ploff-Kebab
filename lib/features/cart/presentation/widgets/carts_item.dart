@@ -85,58 +85,54 @@ class _CartsItemState extends State<CartsItem> {
                       },
                       child: SvgPicture.asset(AppIcons.cancel)),
                   SizedBox(height: 40.0.h),
-                  BlocBuilder<CounterCubit, CounterState>(
-                    builder: (context, state) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              borderRadius: BorderRadius.circular(6.0.r),
-                              border: Border.all(
-                                color: AppColors.black.withOpacity(.1),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(6.0.r),
+                          border: Border.all(
+                            color: AppColors.black.withOpacity(.1),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            IncDecButtons(
+                              marginH: 5.w,
+                              iconWiwth: 10.w,
+                              imagePath: AppIcons.minus,
+                              onTap: () {
+                                setState(() => {
+                                      if (count > 1)
+                                        {
+                                          count--,
+                                        }
+                                    });
+                                // context.read<CounterCubit>().decrement();
+                              },
+                            ),
+                            Text(
+                              count.toString(),
+                              style: AppTextsyles.w500.copyWith(
+                                fontSize: 15.0.sp,
                               ),
                             ),
-                            child: Row(
-                              children: [
-                                IncDecButtons(
-                                  marginH: 5.w,
-                                  iconWiwth: 10.w,
-                                  imagePath: AppIcons.minus,
-                                  onTap: () {
-                                    setState(() => {
-                                          if (count > 1)
-                                            {
-                                              count--,
-                                            }
-                                        });
-                                    // context.read<CounterCubit>().decrement();
-                                  },
-                                ),
-                                Text(
-                                  count.toString(),
-                                  style: AppTextsyles.w500.copyWith(
-                                    fontSize: 15.0.sp,
-                                  ),
-                                ),
-                                IncDecButtons(
-                                  marginH: 5.w,
-                                  iconWiwth: 10.w,
-                                  onTap: () {
-                                    setState(() {
-                                      count++;
-                                    });
-                                    // context.read<CounterCubit>().increment();
-                                  },
-                                  imagePath: AppIcons.plus,
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
+                            IncDecButtons(
+                              marginH: 5.w,
+                              iconWiwth: 10.w,
+                              onTap: () {
+                                setState(() {
+                                  count++;
+                                });
+                                // context.read<CounterCubit>().increment();
+                              },
+                              imagePath: AppIcons.plus,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               )
